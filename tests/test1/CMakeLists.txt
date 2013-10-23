@@ -3,7 +3,7 @@ set( TARGET_NAME_1 TestEvaluator )
 set( TARGET_NAME_2 TestEvalExpression )
 set( TARGET_NAME_3 TestTokenizer )
 
-include_directories( ${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/tests/gtest/gtest-1.6.0/include )
+include_directories( ${CMAKE_SOURCE_DIR} ${GTEST_SOURCE_DIR}/include )
 
 add_executable( ${TARGET_NAME_1}
     testeval.cc

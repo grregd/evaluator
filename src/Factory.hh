@@ -3,50 +3,9 @@
 #include <string>
 #include <iosfwd>
 #include <sstream>
+#include <stdexcept>
 
-#include "exprtoken.hh"
-
-class Tokenizer
-{
-public:
-    std::string nextStrToken( std::istream & aInput )
-    {
-        static const char * lDigits = "0123456789";
-        static const char   lDecPoint = '.';
-        static const std::string   lSigns = "+-*/^()&|";
-
-        std::string lResult;
-
-        if ( iBuffer.empty() )
-        {
-            aInput >> iBuffer;
-        }
-
-        if ( ! iBuffer.empty() )
-        {
-            if (std::isdigit( iBuffer[0] ))
-            {
-                std::string::size_type lPos = iBuffer.find_first_not_of(lDigits);
-                if (lPos != std::string::npos && iBuffer[lPos] == lDecPoint)
-                {
-                    lPos = iBuffer.find_first_not_of(lDigits, lPos+1);
-                }
-                lResult = iBuffer.substr( 0, lPos );
-                iBuffer.erase( 0, lPos );
-            }
-            else if ( lSigns.find( iBuffer[0] ) != std::string::npos )
-            {
-                lResult = iBuffer[0];
-                iBuffer.erase(0, 1);
-            }
-        }
-
-        return lResult;
-    }
-
-private:
-    std::string iBuffer;
-};
+#include <exprtoken.hh>
 
 class Factory
 {
