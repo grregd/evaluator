@@ -13,9 +13,13 @@ public:
     std::string nextStrToken( std::istream & aInput );
 
 private:
+    void eatName( std::string & aResult );
+
     void eatNumber( std::string & aResult );
 
     void eatOperator( std::string & aResult );
+
+    bool isAlpha( const char aChar ) const;
 
     bool isDigit( const char aChar ) const;
 

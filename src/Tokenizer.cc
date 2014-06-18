@@ -1,7 +1,10 @@
 
 #include "Tokenizer.hh"
 
+#include <algorithm>
 #include <stdexcept>
+#include <tr1/functional>
+#include <functional>
 
 
 Tokenizer::Tokenizer()
@@ -49,9 +52,29 @@ std::string Tokenizer::nextStrToken( std::istream & aInput )
         {
             eatNumber( lResult );
         }
+        else if ( isAlpha( cc() ) )
+        {
+            eatName( lResult );
+        }
+        else
+        {
+            throw std::runtime_error("unrecognized input");
+        }
     }
 
     return iPreviousToken = lResult;
+}
+
+void Tokenizer::eatName( std::string & aResult )
+{
+    std::string::iterator lPos
+            = std::find_if( iBuffer.begin(), iBuffer.end(), std::tr1::bind(
+                                std::not1( std::bind1st( std::mem_fun(
+                                    &Tokenizer::isAlpha ), this ) ),
+                                    std::tr1::placeholders::_1 ) );
+
+    aResult.append( iBuffer.begin(), lPos );
+    iBuffer.erase( iBuffer.begin(), lPos );
 }
 
 void Tokenizer::eatNumber( std::string & aResult )
@@ -84,6 +107,11 @@ void Tokenizer::eatOperator( std::string & aResult )
 {
     aResult = cc();
     iBuffer.erase(0, 1);
+}
+
+bool Tokenizer::isAlpha( const char aChar ) const
+{
+    return std::isalpha( aChar );
 }
 
 bool Tokenizer::isDigit( const char aChar ) const
