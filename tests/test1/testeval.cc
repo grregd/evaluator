@@ -1,6 +1,6 @@
 
-#include <tr1/tuple>
-#include <tr1/memory>
+#include <tuple>
+#include <memory>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -14,7 +14,6 @@
 #include "testparams.hh"
 
 using namespace std;
-using namespace std::tr1;
 
 using namespace Operations;
 using namespace Operands;
@@ -111,8 +110,8 @@ TYPED_TEST_P( OneArgOperationTest, exec )
         ASSERT_NO_THROW( lEvaluator.eval( lStack ) );
 
         ASSERT_EQ( 1, lEvaluator.getOperandsStack().size() );
-        ASSERT_TRUE( lResultObject = dynamic_pointer_cast<ResultType>(lEvaluator.getOperandsStack().top()) );
-        ASSERT_TRUE( lResultObject );
+        ASSERT_TRUE( (bool)(lResultObject = dynamic_pointer_cast<ResultType>(lEvaluator.getOperandsStack().top())) );
+        ASSERT_TRUE( (bool)lResultObject );
         ASSERT_EQ( this->iTestParams.iResultValues[i], lResultObject->getValue() );
     }
 }
@@ -186,8 +185,8 @@ TYPED_TEST_P( TwoArgsOperationTest, exec )
 
         ASSERT_EQ( 1, lEvaluator.getOperandsStack().size() )
                 << "Arg1: " << this->iTestParams.iArg1Values[i] << ", Arg2: " << this->iTestParams.iArg2Values[i];
-        ASSERT_TRUE( lResultObject = dynamic_pointer_cast<ResultType>(lEvaluator.getOperandsStack().top()) );
-        ASSERT_TRUE( lResultObject );
+        ASSERT_TRUE( (bool)(lResultObject = dynamic_pointer_cast<ResultType>(lEvaluator.getOperandsStack().top())) );
+        ASSERT_TRUE( (bool)lResultObject );
         ASSERT_EQ( this->iTestParams.iResultValues[i], lResultObject->getValue() )
                 << "Arg1: " << this->iTestParams.iArg1Values[i] << ", Arg2: " << this->iTestParams.iArg2Values[i];
     }

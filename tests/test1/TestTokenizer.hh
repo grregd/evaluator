@@ -1,10 +1,10 @@
 #pragma once
 
-#include <tr1/tuple>
 #include <gtest/gtest.h>
+#include <tuple>
 #include <string>
 
-class TestTokenizer: public testing::TestWithParam< std::tr1::tuple<std::string, std::string> >
+class TestTokenizer: public testing::TestWithParam< std::tuple<std::string, std::string> >
 {
 
 };

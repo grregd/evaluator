@@ -77,12 +77,12 @@ public:
     }
 };
 
-typedef std::tr1::tuple<Rectangle, Ellipse, Poly> TypesTupleLhs;
-typedef std::tr1::tuple<Rectangle, Ellipse, Poly> TypesTupleRhs;
+typedef std::tuple<Rectangle, Ellipse, Poly> TypesTupleLhs;
+typedef std::tuple<Rectangle, Ellipse, Poly> TypesTupleRhs;
 
 typedef StaticDispatcher < HatchingExecutor,
-                           Shape, TypesTupleLhs, std::tr1::tuple_size<TypesTupleLhs>::value,
-                           Shape, TypesTupleRhs, std::tr1::tuple_size<TypesTupleRhs>::value,
+                           Shape, TypesTupleLhs, std::tuple_size<TypesTupleLhs>::value,
+                           Shape, TypesTupleRhs, std::tuple_size<TypesTupleRhs>::value,
                            int
                          > Dispatcher;
 

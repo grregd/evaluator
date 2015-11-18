@@ -5,8 +5,8 @@
 
 TEST_P(TestEvalExpression, evaluating)
 {
-    const char * lInput  = std::tr1::get< 0 >( GetParam() );
-    const char * lOutput = std::tr1::get< 1 >( GetParam() );
+    const char * lInput  = std::get< 0 >( GetParam() );
+    const char * lOutput = std::get< 1 >( GetParam() );
     //    {
     //        std::string lExpressions[] = { "1.09991 + 1.1 + 2" };
     //        std::for_each( lExpressions, lExpressions+1,  )
@@ -16,149 +16,149 @@ TEST_P(TestEvalExpression, evaluating)
 
 }
 
-std::tr1::tuple< const char *, const char * > lOneValue[] = {
-    std::tr1::make_tuple( "", "" ),
-    std::tr1::make_tuple( "-1", "-1" ),
-    std::tr1::make_tuple( "0", "0" ),
-    std::tr1::make_tuple( "1", "1" ),
-    std::tr1::make_tuple( "2", "2" ),
+std::tuple< const char *, const char * > lOneValue[] = {
+    std::make_tuple( "", "" ),
+    std::make_tuple( "-1", "-1" ),
+    std::make_tuple( "0", "0" ),
+    std::make_tuple( "1", "1" ),
+    std::make_tuple( "2", "2" ),
 
-    std::tr1::make_tuple( "-01", "-1" ),
-    std::tr1::make_tuple( "00", "0" ),
-    std::tr1::make_tuple( "01", "1" ),
-    std::tr1::make_tuple( "02", "2" ),
+    std::make_tuple( "-01", "-1" ),
+    std::make_tuple( "00", "0" ),
+    std::make_tuple( "01", "1" ),
+    std::make_tuple( "02", "2" ),
 
-    std::tr1::make_tuple( "-010", "-10" ),
-    std::tr1::make_tuple( "000", "0" ),
-    std::tr1::make_tuple( "010", "10" ),
-    std::tr1::make_tuple( "020", "20" ),
+    std::make_tuple( "-010", "-10" ),
+    std::make_tuple( "000", "0" ),
+    std::make_tuple( "010", "10" ),
+    std::make_tuple( "020", "20" ),
 
-    std::tr1::make_tuple( "a", "0" ),
-    std::tr1::make_tuple( "b", "0" ),
+    std::make_tuple( "a", "0" ),
+    std::make_tuple( "b", "0" ),
 };
 
-std::tr1::tuple< const char *, const char * > lOneAddText[] = {
+std::tuple< const char *, const char * > lOneAddText[] = {
 };
 
-std::tr1::tuple< const char *, const char * > lOneAddPositive[] = {
-    std::tr1::make_tuple( "0+0", "0" ),
-    std::tr1::make_tuple( "0 +0", "0" ),
-    std::tr1::make_tuple( "0+ 0", "0" ),
-    std::tr1::make_tuple( "0 + 0", "0" ),
+std::tuple< const char *, const char * > lOneAddPositive[] = {
+    std::make_tuple( "0+0", "0" ),
+    std::make_tuple( "0 +0", "0" ),
+    std::make_tuple( "0+ 0", "0" ),
+    std::make_tuple( "0 + 0", "0" ),
 
-    std::tr1::make_tuple( "0+1", "1" ),
-    std::tr1::make_tuple( "0 +1", "1" ),
-    std::tr1::make_tuple( "0+ 1", "1" ),
-    std::tr1::make_tuple( "0 + 1", "1" ),
+    std::make_tuple( "0+1", "1" ),
+    std::make_tuple( "0 +1", "1" ),
+    std::make_tuple( "0+ 1", "1" ),
+    std::make_tuple( "0 + 1", "1" ),
 
-    std::tr1::make_tuple( "1+0", "1" ),
-    std::tr1::make_tuple( "1 +0", "1" ),
-    std::tr1::make_tuple( "1+ 0", "1" ),
-    std::tr1::make_tuple( "1 + 0", "1" ),
+    std::make_tuple( "1+0", "1" ),
+    std::make_tuple( "1 +0", "1" ),
+    std::make_tuple( "1+ 0", "1" ),
+    std::make_tuple( "1 + 0", "1" ),
 };
 
 
-std::tr1::tuple< const char *, const char * > lOneAddNegative[] = {
-    std::tr1::make_tuple( "-0+0", "0" ),
-    std::tr1::make_tuple( "-0 +0", "0" ),
-    std::tr1::make_tuple( "-0+ 0", "0" ),
-    std::tr1::make_tuple( "-0 + 0", "0" ),
-    std::tr1::make_tuple( "0+-0", "0" ),
-    std::tr1::make_tuple( "0 +-0", "0" ),
-    std::tr1::make_tuple( "0+ -0", "0" ),
-    std::tr1::make_tuple( "0 + -0", "0" ),
-    std::tr1::make_tuple( "-0+-0", "0" ),
-    std::tr1::make_tuple( "-0 +-0", "0" ),
-    std::tr1::make_tuple( "-0+ -0", "0" ),
-    std::tr1::make_tuple( "-0 + -0", "0" ),
+std::tuple< const char *, const char * > lOneAddNegative[] = {
+    std::make_tuple( "-0+0", "0" ),
+    std::make_tuple( "-0 +0", "0" ),
+    std::make_tuple( "-0+ 0", "0" ),
+    std::make_tuple( "-0 + 0", "0" ),
+    std::make_tuple( "0+-0", "0" ),
+    std::make_tuple( "0 +-0", "0" ),
+    std::make_tuple( "0+ -0", "0" ),
+    std::make_tuple( "0 + -0", "0" ),
+    std::make_tuple( "-0+-0", "0" ),
+    std::make_tuple( "-0 +-0", "0" ),
+    std::make_tuple( "-0+ -0", "0" ),
+    std::make_tuple( "-0 + -0", "0" ),
 
-    std::tr1::make_tuple( "-0+1", "1" ),
-    std::tr1::make_tuple( "-0 +1", "1" ),
-    std::tr1::make_tuple( "-0+ 1", "1" ),
-    std::tr1::make_tuple( "-0 + 1", "1" ),
-    std::tr1::make_tuple( "0+-1", "-1" ),
-    std::tr1::make_tuple( "0 +-1", "-1" ),
-    std::tr1::make_tuple( "0+ -1", "-1" ),
-    std::tr1::make_tuple( "0 + -1", "-1" ),
-    std::tr1::make_tuple( "-0+-1", "-1" ),
-    std::tr1::make_tuple( "-0 +-1", "-1" ),
-    std::tr1::make_tuple( "-0+ -1", "-1" ),
-    std::tr1::make_tuple( "-0 + -1", "-1" ),
+    std::make_tuple( "-0+1", "1" ),
+    std::make_tuple( "-0 +1", "1" ),
+    std::make_tuple( "-0+ 1", "1" ),
+    std::make_tuple( "-0 + 1", "1" ),
+    std::make_tuple( "0+-1", "-1" ),
+    std::make_tuple( "0 +-1", "-1" ),
+    std::make_tuple( "0+ -1", "-1" ),
+    std::make_tuple( "0 + -1", "-1" ),
+    std::make_tuple( "-0+-1", "-1" ),
+    std::make_tuple( "-0 +-1", "-1" ),
+    std::make_tuple( "-0+ -1", "-1" ),
+    std::make_tuple( "-0 + -1", "-1" ),
 
-    std::tr1::make_tuple( "-1+0", "-1" ),
-    std::tr1::make_tuple( "-1 +0", "-1" ),
-    std::tr1::make_tuple( "-1+ 0", "-1" ),
-    std::tr1::make_tuple( "-1 + 0", "-1" ),
-    std::tr1::make_tuple( "1+-0", "1" ),
-    std::tr1::make_tuple( "1 +-0", "1" ),
-    std::tr1::make_tuple( "1+ -0", "1" ),
-    std::tr1::make_tuple( "1 + -0", "1" ),
-    std::tr1::make_tuple( "-1+-0", "-1" ),
-    std::tr1::make_tuple( "-1 +-0", "-1" ),
-    std::tr1::make_tuple( "-1+ -0", "-1" ),
-    std::tr1::make_tuple( "-1 + -0", "-1" ),
+    std::make_tuple( "-1+0", "-1" ),
+    std::make_tuple( "-1 +0", "-1" ),
+    std::make_tuple( "-1+ 0", "-1" ),
+    std::make_tuple( "-1 + 0", "-1" ),
+    std::make_tuple( "1+-0", "1" ),
+    std::make_tuple( "1 +-0", "1" ),
+    std::make_tuple( "1+ -0", "1" ),
+    std::make_tuple( "1 + -0", "1" ),
+    std::make_tuple( "-1+-0", "-1" ),
+    std::make_tuple( "-1 +-0", "-1" ),
+    std::make_tuple( "-1+ -0", "-1" ),
+    std::make_tuple( "-1 + -0", "-1" ),
 };
 
-std::tr1::tuple< const char *, const char * > lOneSubPositive[] = {
-    std::tr1::make_tuple( "0-0", "0" ),
-    std::tr1::make_tuple( "0 -0", "0" ),
-    std::tr1::make_tuple( "0- 0", "0" ),
-    std::tr1::make_tuple( "0 - 0", "0" ),
+std::tuple< const char *, const char * > lOneSubPositive[] = {
+    std::make_tuple( "0-0", "0" ),
+    std::make_tuple( "0 -0", "0" ),
+    std::make_tuple( "0- 0", "0" ),
+    std::make_tuple( "0 - 0", "0" ),
 
-    std::tr1::make_tuple( "0-1", "1" ),
-    std::tr1::make_tuple( "0 -1", "1" ),
-    std::tr1::make_tuple( "0- 1", "1" ),
-    std::tr1::make_tuple( "0 - 1", "1" ),
+    std::make_tuple( "0-1", "1" ),
+    std::make_tuple( "0 -1", "1" ),
+    std::make_tuple( "0- 1", "1" ),
+    std::make_tuple( "0 - 1", "1" ),
 
-    std::tr1::make_tuple( "1-0", "1" ),
-    std::tr1::make_tuple( "1 -0", "1" ),
-    std::tr1::make_tuple( "1- 0", "1" ),
-    std::tr1::make_tuple( "1 - 0", "1" ),
+    std::make_tuple( "1-0", "1" ),
+    std::make_tuple( "1 -0", "1" ),
+    std::make_tuple( "1- 0", "1" ),
+    std::make_tuple( "1 - 0", "1" ),
 };
 
-std::tr1::tuple< const char *, const char * > lOneSubNegative[] = {
-    std::tr1::make_tuple( "-0-0", "0" ),
-    std::tr1::make_tuple( "-0 -0", "0" ),
-    std::tr1::make_tuple( "-0- 0", "0" ),
-    std::tr1::make_tuple( "-0 - 0", "0" ),
-    std::tr1::make_tuple( "0--0", "0" ), // is it correct?
-    std::tr1::make_tuple( "0 --0", "0" ),
-    std::tr1::make_tuple( "0- -0", "0" ),
-    std::tr1::make_tuple( "0 - -0", "0" ),
-    std::tr1::make_tuple( "-0--0", "0" ), // is it correct?
-    std::tr1::make_tuple( "-0 --0", "0" ), // is it correct?
-    std::tr1::make_tuple( "-0- -0", "0" ),
-    std::tr1::make_tuple( "-0 - -0", "0" ),
+std::tuple< const char *, const char * > lOneSubNegative[] = {
+    std::make_tuple( "-0-0", "0" ),
+    std::make_tuple( "-0 -0", "0" ),
+    std::make_tuple( "-0- 0", "0" ),
+    std::make_tuple( "-0 - 0", "0" ),
+    std::make_tuple( "0--0", "0" ), // is it correct?
+    std::make_tuple( "0 --0", "0" ),
+    std::make_tuple( "0- -0", "0" ),
+    std::make_tuple( "0 - -0", "0" ),
+    std::make_tuple( "-0--0", "0" ), // is it correct?
+    std::make_tuple( "-0 --0", "0" ), // is it correct?
+    std::make_tuple( "-0- -0", "0" ),
+    std::make_tuple( "-0 - -0", "0" ),
 
-    std::tr1::make_tuple( "0-1", "1" ),
-    std::tr1::make_tuple( "0 -1", "1" ),
-    std::tr1::make_tuple( "0- 1", "1" ),
-    std::tr1::make_tuple( "0 - 1", "1" ),
-    std::tr1::make_tuple( "0-1", "1" ),
-    std::tr1::make_tuple( "0 -1", "1" ),
-    std::tr1::make_tuple( "0- 1", "1" ),
-    std::tr1::make_tuple( "0 - 1", "1" ),
-    std::tr1::make_tuple( "0-1", "1" ),
-    std::tr1::make_tuple( "0 -1", "1" ),
-    std::tr1::make_tuple( "0- 1", "1" ),
-    std::tr1::make_tuple( "0 - 1", "1" ),
+    std::make_tuple( "0-1", "1" ),
+    std::make_tuple( "0 -1", "1" ),
+    std::make_tuple( "0- 1", "1" ),
+    std::make_tuple( "0 - 1", "1" ),
+    std::make_tuple( "0-1", "1" ),
+    std::make_tuple( "0 -1", "1" ),
+    std::make_tuple( "0- 1", "1" ),
+    std::make_tuple( "0 - 1", "1" ),
+    std::make_tuple( "0-1", "1" ),
+    std::make_tuple( "0 -1", "1" ),
+    std::make_tuple( "0- 1", "1" ),
+    std::make_tuple( "0 - 1", "1" ),
 
-    std::tr1::make_tuple( "1-0", "1" ),
-    std::tr1::make_tuple( "1 -0", "1" ),
-    std::tr1::make_tuple( "1- 0", "1" ),
-    std::tr1::make_tuple( "1 - 0", "1" ),
-    std::tr1::make_tuple( "1-0", "1" ),
-    std::tr1::make_tuple( "1 -0", "1" ),
-    std::tr1::make_tuple( "1- 0", "1" ),
-    std::tr1::make_tuple( "1 - 0", "1" ),
-    std::tr1::make_tuple( "1-0", "1" ),
-    std::tr1::make_tuple( "1 -0", "1" ),
-    std::tr1::make_tuple( "1- 0", "1" ),
-    std::tr1::make_tuple( "1 - 0", "1" ),
+    std::make_tuple( "1-0", "1" ),
+    std::make_tuple( "1 -0", "1" ),
+    std::make_tuple( "1- 0", "1" ),
+    std::make_tuple( "1 - 0", "1" ),
+    std::make_tuple( "1-0", "1" ),
+    std::make_tuple( "1 -0", "1" ),
+    std::make_tuple( "1- 0", "1" ),
+    std::make_tuple( "1 - 0", "1" ),
+    std::make_tuple( "1-0", "1" ),
+    std::make_tuple( "1 -0", "1" ),
+    std::make_tuple( "1- 0", "1" ),
+    std::make_tuple( "1 - 0", "1" ),
 };
 
-std::tr1::tuple< const char *, const char * > lVaria[] = {
-    std::tr1::make_tuple( "1.09991 + 1.1 + 2", "4.19991" ),
+std::tuple< const char *, const char * > lVaria[] = {
+    std::make_tuple( "1.09991 + 1.1 + 2", "4.19991" ),
 };
 
 INSTANTIATE_TEST_CASE_P(OneValue,         TestEvalExpression, ::testing::ValuesIn( lOneValue ) );

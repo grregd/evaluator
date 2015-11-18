@@ -181,19 +181,19 @@ std::string Factory::evalExpression( const std::string & aInfixInput )
     if ( ! lEvaluator.getOperandsStack().empty() )
     {
         Operands::OperandPtr lOperand = lEvaluator.getOperandsStack().top();
-        if ( Operands::Numeric::Ptr lValue = std::tr1::dynamic_pointer_cast< Operands::Numeric >( lOperand ) )
+        if ( Operands::Numeric::Ptr lValue = std::dynamic_pointer_cast< Operands::Numeric >( lOperand ) )
         {
             lFormatter << lValue->getValue();
         }
-        else if ( Operands::Bool::Ptr lValue = std::tr1::dynamic_pointer_cast< Operands::Bool >( lOperand ) )
+        else if ( Operands::Bool::Ptr lValue = std::dynamic_pointer_cast< Operands::Bool >( lOperand ) )
         {
             lFormatter << std::boolalpha << lValue->getValue();
         }
-        else if ( Operands::Text::Ptr lValue = std::tr1::dynamic_pointer_cast< Operands::Text >( lOperand ) )
+        else if ( Operands::Text::Ptr lValue = std::dynamic_pointer_cast< Operands::Text >( lOperand ) )
         {
             return lValue->getValue();
         }
-        else if ( Operations::Operation::Ptr lValue = std::tr1::dynamic_pointer_cast< Operations::Operation >( lOperand ) )
+        else if ( Operations::Operation::Ptr lValue = std::dynamic_pointer_cast< Operations::Operation >( lOperand ) )
         {
             lFormatter << typeid(lValue).name();
         }

@@ -4,6 +4,7 @@ cmake_minimum_required(VERSION 2.8)
 enable_testing()
 
 set( GTEST_SOURCE_DIR ${CMAKE_SOURCE_DIR}/tests/gtest/gtest-1.7.0 )
+SET(CMAKE_CXX_FLAGS "-std=c++0x")
 
 include_directories( ${CMAKE_SOURCE_DIR}/src )
 

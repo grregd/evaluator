@@ -1,7 +1,7 @@
 #ifndef __OPERATIONS_HH__
 #define __OPERATIONS_HH__
 
-#include <tr1/memory>
+#include <memory>
 #include <stdexcept>
 #include <stack>
 #include <iostream>
@@ -26,7 +26,7 @@ using Evaluators::Evaluator;
 class Operation: public ExpressionToken
 {
 public:
-    typedef std::tr1::shared_ptr< Operation > Ptr;
+    typedef std::shared_ptr< Operation > Ptr;
 
 public:
     virtual ~Operation() {}
@@ -39,16 +39,16 @@ public:
 class Add: public Operation
 {
 public:
-    typedef std::tr1::shared_ptr< Add > Ptr;
+    typedef std::shared_ptr< Add > Ptr;
 
 public:
     void accept( Evaluator & aEvaluator );
 
 public:
-    Operands::NumericPtr eval( const Operands::NumericPtr & aLhs, 
+    Operands::NumericPtr eval( const Operands::NumericPtr & aLhs,
                                const Operands::NumericPtr & aRhs  );
 
-    Operands::TextPtr eval( const Operands::TextPtr & aLhs, 
+    Operands::TextPtr eval( const Operands::TextPtr & aLhs,
                             const Operands::TextPtr & aRhs  );
 };
 
@@ -59,7 +59,7 @@ public:
 class Sub: public Operation
 {
 public:
-    typedef std::tr1::shared_ptr< Sub > Ptr;
+    typedef std::shared_ptr< Sub > Ptr;
 
 public:
     void accept( Evaluator & );
@@ -76,7 +76,7 @@ public:
 class Mul: public Operation
 {
 public:
-    typedef std::tr1::shared_ptr< Mul > Ptr;
+    typedef std::shared_ptr< Mul > Ptr;
 
 public:
     void accept( Evaluator & );
@@ -93,7 +93,7 @@ public:
 class Div: public Operation
 {
 public:
-    typedef std::tr1::shared_ptr< Div > Ptr;
+    typedef std::shared_ptr< Div > Ptr;
 
 public:
     void accept( Evaluator & );
@@ -110,7 +110,7 @@ public:
 class Pow: public Operation
 {
 public:
-    typedef std::tr1::shared_ptr< Pow > Ptr;
+    typedef std::shared_ptr< Pow > Ptr;
 
 public:
     void accept( Evaluator & );
@@ -123,7 +123,7 @@ public:
 class Eq: public Operation
 {
 public:
-    typedef std::tr1::shared_ptr< Eq > Ptr;
+    typedef std::shared_ptr< Eq > Ptr;
 
 public:
     void accept( Evaluator & );
@@ -139,7 +139,7 @@ public:
             throw std::invalid_argument("Null pointer.");
         }
 
-        return Operands::BoolPtr( 
+        return Operands::BoolPtr(
             new Operands::Bool(
                 aLhs->getValue() == aRhs->getValue() ) );
     }
@@ -151,7 +151,7 @@ public:
 class Neq: public Operation
 {
 public:
-    typedef std::tr1::shared_ptr< Neq > Ptr;
+    typedef std::shared_ptr< Neq > Ptr;
 
 public:
     void accept( Evaluator & );
@@ -163,7 +163,7 @@ public:
 class And: public Operation
 {
 public:
-    typedef std::tr1::shared_ptr< And > Ptr;
+    typedef std::shared_ptr< And > Ptr;
 
 public:
     void accept( Evaluator & );
@@ -179,7 +179,7 @@ public:
 class Or: public Operation
 {
 public:
-    typedef std::tr1::shared_ptr< Or > Ptr;
+    typedef std::shared_ptr< Or > Ptr;
 
 public:
     void accept( Evaluator & );
@@ -195,7 +195,7 @@ public:
 class Not: public Operation
 {
 public:
-    typedef std::tr1::shared_ptr< Not > Ptr;
+    typedef std::shared_ptr< Not > Ptr;
 
 public:
     void accept( Evaluator & );
@@ -211,7 +211,7 @@ public:
 class Gt: public Operation
 {
 public:
-    typedef std::tr1::shared_ptr< Gt > Ptr;
+    typedef std::shared_ptr< Gt > Ptr;
 
 public:
     void accept( Evaluator & );
@@ -228,7 +228,7 @@ public:
 class Ge: public Operation
 {
 public:
-    typedef std::tr1::shared_ptr< Ge > Ptr;
+    typedef std::shared_ptr< Ge > Ptr;
 
 public:
     void accept( Evaluator & );
@@ -245,7 +245,7 @@ public:
 class Lt: public Operation
 {
 public:
-    typedef std::tr1::shared_ptr< Lt > Ptr;
+    typedef std::shared_ptr< Lt > Ptr;
 
 public:
     void accept( Evaluator & );
@@ -262,7 +262,7 @@ public:
 class Le: public Operation
 {
 public:
-    typedef std::tr1::shared_ptr< Le > Ptr;
+    typedef std::shared_ptr< Le > Ptr;
 
 public:
     void accept( Evaluator & );
@@ -273,17 +273,17 @@ public:
 };
 
 
-//typedef std::tr1::shared_ptr<Add> AddPtr;
-//typedef std::tr1::shared_ptr<Sub> SubPtr;
-//typedef std::tr1::shared_ptr<Mul> MulPtr;
-//typedef std::tr1::shared_ptr<Div> DivPtr;
-//typedef std::tr1::shared_ptr<Pow> PowPtr;
+//typedef std::shared_ptr<Add> AddPtr;
+//typedef std::shared_ptr<Sub> SubPtr;
+//typedef std::shared_ptr<Mul> MulPtr;
+//typedef std::shared_ptr<Div> DivPtr;
+//typedef std::shared_ptr<Pow> PowPtr;
 
-//typedef std::tr1::shared_ptr<Eq>  EqPtr;
-//typedef std::tr1::shared_ptr<Neq> NeqPtr;
-//typedef std::tr1::shared_ptr<Or>  OrPtr;
-//typedef std::tr1::shared_ptr<And> AndPtr;
-//typedef std::tr1::shared_ptr<Not> NotPtr;
+//typedef std::shared_ptr<Eq>  EqPtr;
+//typedef std::shared_ptr<Neq> NeqPtr;
+//typedef std::shared_ptr<Or>  OrPtr;
+//typedef std::shared_ptr<And> AndPtr;
+//typedef std::shared_ptr<Not> NotPtr;
 } // namespace Operations
 
 #endif // __OPERATIONS_HH__

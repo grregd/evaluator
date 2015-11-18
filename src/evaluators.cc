@@ -1,6 +1,6 @@
 
 #include <iostream>
-#include <tr1/memory>
+#include <memory>
 
 #include "evaluators.hh"
 #include "operations.hh"
@@ -8,7 +8,6 @@
 #include "staticdispatcher.hh"
 
 using namespace std;
-using namespace std::tr1;
 using namespace Operands;
 using namespace Operations;
 

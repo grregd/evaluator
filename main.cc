@@ -7,9 +7,9 @@
 // http://scriptasylum.com/tutorials/infix_postfix/algorithms/infix-postfix/index.htm
 // http://everything2.com/title/Infix+to+postfix+conversion+algorithm
 
-#include <tr1/memory>
+#include <memory>
 #include <algorithm>
-#include <tr1/functional>
+#include <functional>
 #include <string>
 #include <stack>
 #include <list>
@@ -75,7 +75,7 @@ int main(int argc, char **argv )
     lEvaluator.eval( lStack );
     std::cout << lStack.size() << std::endl;
     std::cout << lEvaluator.getOperandsStack().size() << std::endl;
-    if ( Numeric::Ptr lValue = std::tr1::dynamic_pointer_cast< Numeric >( lEvaluator.getOperandsStack().top() ) )
+    if ( Numeric::Ptr lValue = std::dynamic_pointer_cast< Numeric >( lEvaluator.getOperandsStack().top() ) )
     {
         std::cout << lValue->getValue() << std::endl;
     }

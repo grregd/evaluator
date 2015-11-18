@@ -5,7 +5,6 @@
 
 
 using namespace std;
-using namespace std::tr1;
 
 //template< typename >
 //TestParams< tuple< Add, Numeric, Numeric > >::TestParams()

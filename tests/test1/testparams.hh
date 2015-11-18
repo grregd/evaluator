@@ -1,6 +1,6 @@
 #pragma once
 
-#include <tr1/tuple>
+#include <tuple>
 
 #include <string>
 #include <vector>
@@ -11,7 +11,6 @@
 #include <evaluators.hh>
 
 using namespace std;
-using namespace std::tr1;
 
 using namespace Operations;
 using namespace Operands;

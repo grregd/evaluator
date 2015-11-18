@@ -3,7 +3,7 @@
 
 #include <algorithm>
 #include <stdexcept>
-#include <tr1/functional>
+#include <functional>
 #include <functional>
 
 
@@ -68,10 +68,10 @@ std::string Tokenizer::nextStrToken( std::istream & aInput )
 void Tokenizer::eatName( std::string & aResult )
 {
     std::string::iterator lPos
-            = std::find_if( iBuffer.begin(), iBuffer.end(), std::tr1::bind(
+            = std::find_if( iBuffer.begin(), iBuffer.end(), std::bind(
                                 std::not1( std::bind1st( std::mem_fun(
                                     &Tokenizer::isAlpha ), this ) ),
-                                    std::tr1::placeholders::_1 ) );
+                                    std::placeholders::_1 ) );
 
     aResult.append( iBuffer.begin(), lPos );
     iBuffer.erase( iBuffer.begin(), lPos );

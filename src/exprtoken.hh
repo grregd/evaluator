@@ -1,6 +1,6 @@
 #pragma once
 
-#include <tr1/memory>
+#include <memory>
 #include <stack>
 
 // fwd decl
@@ -19,6 +19,6 @@ public:
     virtual void accept( Evaluators::Evaluator & ) = 0;
 };
 
-typedef std::tr1::shared_ptr< ExpressionToken > ExpressionTokenPtr;
+typedef std::shared_ptr< ExpressionToken > ExpressionTokenPtr;
 typedef std::stack< ExpressionTokenPtr >        ExpressionTokensStack;
 

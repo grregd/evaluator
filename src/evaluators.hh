@@ -69,7 +69,7 @@ private:
 //    template< typename Operation >
 //    Operands::OperandPtr dispatchOneArg( Operation & aOp, const Operands::OperandPtr & aArg ) //throw std::invalid_argument
 //    {
-//        if ( Operands::NumericPtr lNumeric = std::tr1::dynamic_pointer_cast<Operands::Numeric>( aArg ) )
+//        if ( Operands::NumericPtr lNumeric = std::dynamic_pointer_cast<Operands::Numeric>( aArg ) )
 //        {
 //            return aOp.eval( lNumeric );
 //        }

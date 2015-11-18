@@ -1,13 +1,13 @@
 #ifndef __STATICDISPATCHER_HH__
 #define __STATICDISPATCHER_HH__
 
-#include <tr1/tuple>
+#include <tuple>
 #include <typeinfo>
 #include <map>
 #include <stdexcept>
 
 
-//typedef std::tr1::tuple<> NullType;
+//typedef std::tuple<> NullType;
 
 
 //template <
@@ -23,7 +23,7 @@
 //class StaticDispatcher
 //{
 //    //typedef typename TypesLhs::Head Head;
-//    typedef typename std::tr1::tuple_element<IndexLhs-1, TypesLhs>::type Head;
+//    typedef typename std::tuple_element<IndexLhs-1, TypesLhs>::type Head;
 //    //typedef typename TypesLhs::Tail Tail;
 
 
@@ -35,7 +35,7 @@
 //                                  Executor exec)
 //    {
 ////        typedef typename TypesRhs::Head Head;
-//        typedef typename std::tr1::tuple_element<IndexRhs-1, TypesRhs>::type Head;
+//        typedef typename std::tuple_element<IndexRhs-1, TypesRhs>::type Head;
 ////        typedef typename TypesRhs::Tail Tail;
 //        if (Head* p2 = dynamic_cast<Head*>(&rhs))
 //        {

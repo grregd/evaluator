@@ -5,15 +5,16 @@
 #include <sstream>
 #include <iostream>
 #include <cstring>
+#include <tuple>
 
 
 TEST_P(TestTokenizer, nextToken)
 {
     static const char *lDelim = " :\t\n\r";
 
-    std::stringstream lInput( std::tr1::get< 0 >( GetParam() ) );
-    std::string       lTokensString( std::tr1::get< 1 >( GetParam() ) );
-    char lTokens[ std::tr1::get< 1 >( GetParam() ).size() ];
+    std::stringstream lInput( std::get< 0 >( GetParam() ) );
+    std::string       lTokensString( std::get< 1 >( GetParam() ) );
+    char lTokens[ std::get< 1 >( GetParam() ).size() ];
 
     std::copy( lTokensString.begin(), lTokensString.end(), lTokens );
     lTokens[lTokensString.size()] = 0;
@@ -36,66 +37,66 @@ TEST_P(TestTokenizer, nextToken)
     ASSERT_TRUE( lTokenActual.empty() ) << lTokenActual;
 }
 
-static std::tr1::tuple< std::string, std::string > lPlusOrMinusAndSign[] = {
-    std::tr1::make_tuple( "1++1", "1:+:+1" ),
-    std::tr1::make_tuple( "1+-1", "1:+:-1" ),
-    std::tr1::make_tuple( "2--2", "2:-:-2" ),
-    std::tr1::make_tuple( "2-+2", "2:-:+2" ),
+static std::tuple< std::string, std::string > lPlusOrMinusAndSign[] = {
+    std::make_tuple( "1++1", "1:+:+1" ),
+    std::make_tuple( "1+-1", "1:+:-1" ),
+    std::make_tuple( "2--2", "2:-:-2" ),
+    std::make_tuple( "2-+2", "2:-:+2" ),
 };
 
-static std::tr1::tuple< std::string, std::string > lSingleCharacter[] = {
-    std::tr1::make_tuple( "1", "1" ),
-    std::tr1::make_tuple( "a", "a" ),
-    std::tr1::make_tuple( "B", "B" ),
-    std::tr1::make_tuple( "+", "+" ),
-    std::tr1::make_tuple( "-", "-" ),
-    std::tr1::make_tuple( "*", "*" ),
-    std::tr1::make_tuple( "^", "^" ),
-    std::tr1::make_tuple( "/", "/" ),
-    std::tr1::make_tuple( "(", "(" ),
-    std::tr1::make_tuple( ")", ")" ),
-    std::tr1::make_tuple( "&", "&" ),
-    std::tr1::make_tuple( "|", "|" ),
+static std::tuple< std::string, std::string > lSingleCharacter[] = {
+    std::make_tuple( "1", "1" ),
+    std::make_tuple( "a", "a" ),
+    std::make_tuple( "B", "B" ),
+    std::make_tuple( "+", "+" ),
+    std::make_tuple( "-", "-" ),
+    std::make_tuple( "*", "*" ),
+    std::make_tuple( "^", "^" ),
+    std::make_tuple( "/", "/" ),
+    std::make_tuple( "(", "(" ),
+    std::make_tuple( ")", ")" ),
+    std::make_tuple( "&", "&" ),
+    std::make_tuple( "|", "|" ),
 };
 
-static std::tr1::tuple< std::string, std::string > lVaria[] = {
-    std::tr1::make_tuple( "1+", "1:+" ),
-    std::tr1::make_tuple( "2-", "2:-" ),
-    std::tr1::make_tuple( "3*", "3:*" ),
-    std::tr1::make_tuple( "4^", "4:^" ),
-    std::tr1::make_tuple( "5/", "5:/" ),
-    std::tr1::make_tuple( "6(", "6:(" ),
-    std::tr1::make_tuple( "7)", "7:)" ),
-    std::tr1::make_tuple( "8&", "8:&" ),
-    std::tr1::make_tuple( "9|", "9:|" ),
+static std::tuple< std::string, std::string > lVaria[] = {
+    std::make_tuple( "1+", "1:+" ),
+    std::make_tuple( "2-", "2:-" ),
+    std::make_tuple( "3*", "3:*" ),
+    std::make_tuple( "4^", "4:^" ),
+    std::make_tuple( "5/", "5:/" ),
+    std::make_tuple( "6(", "6:(" ),
+    std::make_tuple( "7)", "7:)" ),
+    std::make_tuple( "8&", "8:&" ),
+    std::make_tuple( "9|", "9:|" ),
 
-    std::tr1::make_tuple( "+1", "+1" ),
-    std::tr1::make_tuple( "-2", "-2" ),
-    std::tr1::make_tuple( "*3", "*:3" ),
-    std::tr1::make_tuple( "^4", "^:4" ),
-    std::tr1::make_tuple( "/5", "/:5" ),
-    std::tr1::make_tuple( "(6", "(:6" ),
-    std::tr1::make_tuple( ")7", "):7" ),
-    std::tr1::make_tuple( "&8", "&:8" ),
-    std::tr1::make_tuple( "|9", "|:9" ),
+    std::make_tuple( "+1", "+1" ),
+    std::make_tuple( "-2", "-2" ),
+    std::make_tuple( "*3", "*:3" ),
+    std::make_tuple( "^4", "^:4" ),
+    std::make_tuple( "/5", "/:5" ),
+    std::make_tuple( "(6", "(:6" ),
+    std::make_tuple( ")7", "):7" ),
+    std::make_tuple( "&8", "&:8" ),
+    std::make_tuple( "|9", "|:9" ),
 
-    std::tr1::make_tuple( "1+1", "1:+:1" ),
-    std::tr1::make_tuple( "2-2", "2:-:2" ),
-    std::tr1::make_tuple( "3*3", "3:*:3" ),
-    std::tr1::make_tuple( "4^4", "4:^:4" ),
-    std::tr1::make_tuple( "5/5", "5:/:5" ),
-    std::tr1::make_tuple( "6(6", "6:(:6" ),
-    std::tr1::make_tuple( "7)7", "7:):7" ),
-    std::tr1::make_tuple( "8&8", "8:&:8" ),
-    std::tr1::make_tuple( "9|9", "9:|:9" ),
+    std::make_tuple( "1+1", "1:+:1" ),
+    std::make_tuple( "2-2", "2:-:2" ),
+    std::make_tuple( "3*3", "3:*:3" ),
+    std::make_tuple( "4^4", "4:^:4" ),
+    std::make_tuple( "5/5", "5:/:5" ),
+    std::make_tuple( "6(6", "6:(:6" ),
+    std::make_tuple( "7)7", "7:):7" ),
+    std::make_tuple( "8&8", "8:&:8" ),
+    std::make_tuple( "9|9", "9:|:9" ),
 
-    std::tr1::make_tuple( "1.09991 + 1.1 + 2 4.19991", "1.09991:+:1.1:+:2:4.19991" ),
+    std::make_tuple( "1.09991 + 1.1 + 2 4.19991", "1.09991:+:1.1:+:2:4.19991" ),
 };
 
 class ReadTests
 {
 public:
-    typedef std::tr1::tuple< std::string, std::string > InputOutputPair;
+    typedef std::tuple< std::string, std::string > InputOutputPair;
     typedef std::vector< InputOutputPair > TestDataContainer;
 
 public:

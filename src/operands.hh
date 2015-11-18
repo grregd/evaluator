@@ -1,7 +1,7 @@
 #ifndef __OPERANDS_HH__
 #define __OPERANDS_HH__
 
-#include <tr1/memory>
+#include <memory>
 #include <stack>
 #include <string>
 
@@ -28,10 +28,10 @@ class Operand: public ExpressionToken
  */
 class SelectorFP11
     : public Operand
-    , public std::tr1::enable_shared_from_this< SelectorFP11 >
+    , public std::enable_shared_from_this< SelectorFP11 >
 {
 public:
-    typedef std::tr1::shared_ptr< SelectorFP11 > Ptr;
+    typedef std::shared_ptr< SelectorFP11 > Ptr;
 
 public:
     void setSubject() {}
@@ -48,10 +48,10 @@ private:
  */
 class Bool
    : public Operand
-   , public std::tr1::enable_shared_from_this< Bool >
+   , public std::enable_shared_from_this< Bool >
 {
 public:
-    typedef std::tr1::shared_ptr< Bool > Ptr;
+    typedef std::shared_ptr< Bool > Ptr;
 
 public:
     Bool(): iValue(0)
@@ -76,10 +76,10 @@ private:
  */
 class Numeric
     : public Operand
-    , public std::tr1::enable_shared_from_this< Numeric >
+    , public std::enable_shared_from_this< Numeric >
 {
 public:
-    typedef std::tr1::shared_ptr< Numeric > Ptr;
+    typedef std::shared_ptr< Numeric > Ptr;
 
 public:
     Numeric(): iValue(0)
@@ -104,10 +104,10 @@ private:
  */
 class Text
     : public Operand
-    , public std::tr1::enable_shared_from_this< Text >
+    , public std::enable_shared_from_this< Text >
 {
 public:
-    typedef std::tr1::shared_ptr< Text > Ptr;
+    typedef std::shared_ptr< Text > Ptr;
 
 public:
     Text()
@@ -128,11 +128,11 @@ private:
 };
 
 
-typedef std::tr1::shared_ptr< Operand >       OperandPtr;
-typedef std::tr1::shared_ptr< SelectorFP11 >  SelectorFP11Ptr;
-typedef std::tr1::shared_ptr< Bool >          BoolPtr;
-typedef std::tr1::shared_ptr< Numeric >       NumericPtr;
-typedef std::tr1::shared_ptr< Text >          TextPtr;
+typedef std::shared_ptr< Operand >       OperandPtr;
+typedef std::shared_ptr< SelectorFP11 >  SelectorFP11Ptr;
+typedef std::shared_ptr< Bool >          BoolPtr;
+typedef std::shared_ptr< Numeric >       NumericPtr;
+typedef std::shared_ptr< Text >          TextPtr;
 
 typedef std::stack< OperandPtr >              OperandsStack;
 
