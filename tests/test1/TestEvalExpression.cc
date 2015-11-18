@@ -33,8 +33,8 @@ std::tuple< const char *, const char * > lOneValue[] = {
     std::make_tuple( "010", "10" ),
     std::make_tuple( "020", "20" ),
 
-    std::make_tuple( "a", "0" ),
-    std::make_tuple( "b", "0" ),
+//    std::make_tuple( "a", "0" ),
+//    std::make_tuple( "b", "0" ),
 };
 
 std::tuple< const char *, const char * > lOneAddText[] = {

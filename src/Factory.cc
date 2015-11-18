@@ -8,6 +8,7 @@
 #include <stdexcept>
 #include <list>
 #include <stack>
+#include <string>
 
 
 
@@ -119,7 +120,8 @@ void Factory::transform(
 
     while ( ! lTok.empty() )
     {
-        if ( aOperations.find(lTok[0]) != std::string::npos )
+        if ( lTok.size() == 1 &&
+             aOperations.find(lTok[0]) != std::string::npos )
         {
             // check precedences
             while (!op_stack.empty() &&
@@ -214,26 +216,29 @@ ExpressionTokenPtr Factory::createToken( const std::string & aInput )
 
     if ( ! aInput.empty() )
     {
-        switch ( aInput[0] )
+        if ( aInput.size() > 1 )
         {
-            case '+': lResult = Operations::Add::Ptr( new Operations::Add() ); break;
-            case '-': lResult = Operations::Sub::Ptr( new Operations::Sub() ); break;
-            case '|': lResult = Operations::Or::Ptr( new Operations::Or() ); break;
-            case '*': lResult = Operations::Mul::Ptr( new Operations::Mul() ); break;
-            case '/': lResult = Operations::Div::Ptr( new Operations::Div() ); break;
-            case '^': lResult = Operations::Pow::Ptr( new Operations::Pow() ); break;
-            case '&': lResult = Operations::And::Ptr( new Operations::And() ); break;
-            case '<': lResult = Operations::Lt::Ptr( new Operations::Lt() ); break;
-            case '>': lResult = Operations::Gt::Ptr( new Operations::Gt() ); break;
-            default:
-                {
-                    std::stringstream s( aInput );
-                    double lValue;
-                    s >> lValue;
-
-                    lResult = Operands::Numeric::Ptr( new Operands::Numeric(lValue) );
-                }
-            break;
+            lResult = Operands::Numeric::Ptr( new Operands::Numeric( std::stod( aInput ) ) );
+        }
+        else
+        {
+            switch ( aInput[0] )
+            {
+                case '+': lResult = Operations::Add::Ptr( new Operations::Add() ); break;
+                case '-': lResult = Operations::Sub::Ptr( new Operations::Sub() ); break;
+                case '|': lResult = Operations::Or::Ptr( new Operations::Or() ); break;
+                case '*': lResult = Operations::Mul::Ptr( new Operations::Mul() ); break;
+                case '/': lResult = Operations::Div::Ptr( new Operations::Div() ); break;
+                case '^': lResult = Operations::Pow::Ptr( new Operations::Pow() ); break;
+                case '&': lResult = Operations::And::Ptr( new Operations::And() ); break;
+                case '<': lResult = Operations::Lt::Ptr( new Operations::Lt() ); break;
+                case '>': lResult = Operations::Gt::Ptr( new Operations::Gt() ); break;
+                default:
+                    {
+                        lResult = Operands::Numeric::Ptr( new Operands::Numeric( std::stod( aInput ) ) );
+                    }
+                break;
+            }
         }
     }
 
