@@ -42,6 +42,16 @@ static std::tuple< std::string, std::string > lPlusOrMinusAndSign[] = {
     std::make_tuple( "1+-1", "1:+:-1" ),
     std::make_tuple( "2--2", "2:-:-2" ),
     std::make_tuple( "2-+2", "2:-:+2" ),
+
+    std::make_tuple( "1+ +1", "1:+:+1" ),
+    std::make_tuple( "1+ -1", "1:+:-1" ),
+    std::make_tuple( "2- -2", "2:-:-2" ),
+    std::make_tuple( "2- +2", "2:-:+2" ),
+
+    std::make_tuple( "1 + +1", "1:+:+1" ),
+    std::make_tuple( "1 + -1", "1:+:-1" ),
+    std::make_tuple( "2 - -2", "2:-:-2" ),
+    std::make_tuple( "2 - +2", "2:-:+2" ),
 };
 
 static std::tuple< std::string, std::string > lSingleCharacter[] = {
