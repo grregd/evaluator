@@ -3,6 +3,7 @@
 #include "evaluators.hh"
 #include "operands.hh"
 #include "operations.hh"
+#include "Tokenizer.hh"
 
 #include <iostream>
 #include <stdexcept>
@@ -112,11 +113,11 @@ void Factory::transform(
     init_precedencetab();
 
     std::list< ExpressionTokenPtr>  lExpressionTokensList;
-
     std::stack<std::string> op_stack;
     std::stringstream lExpressionStream(aInfixExpression);
 
-    std::string lTok = Factory::nextStrToken( lExpressionStream );
+    Tokenizer lTokenizer;
+    std::string lTok = lTokenizer.nextStrToken( lExpressionStream );
 
     while ( ! lTok.empty() )
     {
@@ -128,7 +129,6 @@ void Factory::transform(
                    aOperations.find(op_stack.top()[0]) != std::string::npos &&
                    cmpprecedence(op_stack.top()[0], lTok[0]) >= 0)
             {
-//                    aResultPostfixExpression.push( createToken( op_stack.top() ) );
                 lExpressionTokensList.push_back( createToken( op_stack.top() ) );
                 op_stack.pop();
             }
@@ -141,21 +141,18 @@ void Factory::transform(
             while (!op_stack.empty() &&
                     op_stack.top() != "(")
             {
-//                    aResultPostfixExpression.push( createToken( op_stack.top() ) );
                 lExpressionTokensList.push_back( createToken( op_stack.top() ) );
                 op_stack.pop();
             }
             op_stack.pop();
         }
-//            else aResultPostfixExpression.push( createToken( lTok ) );
         else lExpressionTokensList.push_back( createToken( lTok ) );
 
-        lTok = Factory::nextStrToken( lExpressionStream );
+        lTok = lTokenizer.nextStrToken( lExpressionStream );
     }
 
     while (!op_stack.empty())
     {
-//            aResultPostfixExpression.push( createToken( op_stack.top() ) );
         lExpressionTokensList.push_back( createToken( op_stack.top() ) );
 
         op_stack.pop();
