@@ -8,22 +8,22 @@ namespace Operands
 {
 
 
-void SelectorFP11::accept( Evaluators::Evaluator & aEvaluator )
+void SelectorFP11::accept( Evaluators::Visitor & aEvaluator )
 {
     aEvaluator.visit( shared_from_this() );
 }
 
-void Bool::accept( Evaluators::Evaluator & aEvaluator )
+void Bool::accept( Evaluators::Visitor & aEvaluator )
 {
     aEvaluator.visit( shared_from_this()  );
 }
 
-void Numeric::accept( Evaluators::Evaluator & aEvaluator )
+void Numeric::accept( Evaluators::Visitor & aEvaluator )
 {
     aEvaluator.visit( shared_from_this()  );
 }
 
-void Text::accept( Evaluators::Evaluator & aEvaluator )
+void Text::accept( Evaluators::Visitor & aEvaluator )
 {
     aEvaluator.visit( shared_from_this() );
 }

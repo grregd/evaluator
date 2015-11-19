@@ -2,6 +2,7 @@
 #define __EVALUATORS_HH__
 
 #include <stdexcept>
+#include <iostream>
 
 #include "operands.hh"
 #include "exprtoken.hh"
@@ -30,16 +31,43 @@ class Le;
 namespace Evaluators
 {
 
+void evaluate( ExpressionTokensStack & aStack, Visitor & aEvaluator );
+
+class Visitor
+{
+public:
+    virtual void visit( Operands::SelectorFP11Ptr aOperand ) = 0;
+    virtual void visit( Operands::BoolPtr         aOperand ) = 0;
+    virtual void visit( Operands::NumericPtr      aOperand ) = 0;
+    virtual void visit( Operands::TextPtr         aOperand ) = 0;
+
+public:
+    virtual void visit( Operations::Add & aOperation ) = 0;
+    virtual void visit( Operations::Sub & aOperation ) = 0;
+    virtual void visit( Operations::Mul & aOperation ) = 0;
+    virtual void visit( Operations::Div & aOperation ) = 0;
+    virtual void visit( Operations::Pow & aOperation ) = 0;
+
+    virtual void visit( Operations::Eq  & aOperation ) = 0;
+    virtual void visit( Operations::Neq & aOperation ) = 0;
+    virtual void visit( Operations::And & aOperation ) = 0;
+    virtual void visit( Operations::Or  & aOperation ) = 0;
+    virtual void visit( Operations::Not & aOperation ) = 0;
+    virtual void visit( Operations::Gt  & aOperation ) = 0;
+    virtual void visit( Operations::Ge  & aOperation ) = 0;
+    virtual void visit( Operations::Lt  & aOperation ) = 0;
+    virtual void visit( Operations::Le  & aOperation ) = 0;
+};
+
 
 /**
  * class Evaluator
  */
-class Evaluator
+class Evaluator: public Visitor
 {
 public:
     Evaluator( )  {}
 
-    void eval( ExpressionTokensStack & );
     const Operands::OperandsStack & getOperandsStack() const { return iOperands; }
 
 public:

@@ -11,12 +11,12 @@ using namespace std;
 using namespace Evaluators;
 
 // class Add
-void Add::accept( Evaluator & aEvaluator )
+void Add::accept( Visitor & aEvaluator )
 {
     aEvaluator.visit( *this );
 }
 
-Operands::NumericPtr Add::eval( const Operands::NumericPtr & aLhs, 
+Operands::NumericPtr Add::eval( const Operands::NumericPtr & aLhs,
                                 const Operands::NumericPtr & aRhs  )
 {
     if ( ! aLhs || ! aRhs )
@@ -25,12 +25,12 @@ Operands::NumericPtr Add::eval( const Operands::NumericPtr & aLhs,
     }
 
     return Operands::NumericPtr(
-        new Operands::Numeric( 
+        new Operands::Numeric(
               aLhs->getValue()
             + aRhs->getValue() ) );
 }
 
-Operands::TextPtr Add::eval( const Operands::TextPtr & aLhs, 
+Operands::TextPtr Add::eval( const Operands::TextPtr & aLhs,
                              const Operands::TextPtr & aRhs  )
 {
 //    cout << __PRETTY_FUNCTION__ << endl;
@@ -44,13 +44,13 @@ Operands::TextPtr Add::eval( const Operands::TextPtr & aLhs,
 //    cout << "arg2: " << aRhs->getValue() << endl;
 
     return Operands::TextPtr(
-        new Operands::Text( 
+        new Operands::Text(
               aLhs->getValue()
             + aRhs->getValue() ) );
 }
 
 // class Sub
-void Sub::accept( Evaluator & aEvaluator )
+void Sub::accept( Visitor & aEvaluator )
 {
     aEvaluator.visit( *this );
 }
@@ -71,7 +71,7 @@ Operands::NumericPtr Sub::eval( const Operands::NumericPtr & aLhs,
 
 
 // class Mul
-void Mul::accept( Evaluator & aEvaluator )
+void Mul::accept( Visitor & aEvaluator )
 {
     aEvaluator.visit( *this );
 }
@@ -91,7 +91,7 @@ Operands::NumericPtr Mul::eval( const Operands::NumericPtr & aLhs,
 }
 
 // class Div
-void Div::accept( Evaluator & aEvaluator )
+void Div::accept( Visitor & aEvaluator )
 {
     aEvaluator.visit( *this );
 }
@@ -116,25 +116,25 @@ Operands::NumericPtr Div::eval( const Operands::NumericPtr & aLhs,
 }
 
 // class Pow
-void Pow::accept( Evaluator & aEvaluator )
+void Pow::accept( Visitor & aEvaluator )
 {
     aEvaluator.visit( *this );
 }
 
 // class Eq
-void Eq::accept( Evaluator & aEvaluator )
+void Eq::accept( Visitor & aEvaluator )
 {
     aEvaluator.visit( *this );
 }
 
 // class Neq
-void Neq::accept( Evaluator & aEvaluator )
+void Neq::accept( Visitor & aEvaluator )
 {
     aEvaluator.visit( *this );
 }
 
 // class Or
-void Or::accept( Evaluator & aEvaluator )
+void Or::accept( Visitor & aEvaluator )
 {
     aEvaluator.visit( *this );
 }
@@ -155,7 +155,7 @@ Operands::BoolPtr Or::eval( const Operands::BoolPtr & aLhs,
 
 
 // class And
-void And::accept( Evaluator & aEvaluator )
+void And::accept( Visitor & aEvaluator )
 {
     aEvaluator.visit( *this );
 }
@@ -176,7 +176,7 @@ Operands::BoolPtr And::eval( const Operands::BoolPtr & aLhs,
 
 
 // class Not
-void Not::accept( Evaluator & aEvaluator )
+void Not::accept( Visitor & aEvaluator )
 {
     aEvaluator.visit( *this );
 }
@@ -191,12 +191,12 @@ Operands::OperandPtr Not::eval( const Operands::BoolPtr & aArg )
     }
 
     return Operands::BoolPtr(
-        new Operands::Bool( 
+        new Operands::Bool(
               ! aArg->getValue() ) );
 }
 
 // class Gt
-void Gt::accept( Evaluator & aEvaluator )
+void Gt::accept( Visitor & aEvaluator )
 {
     aEvaluator.visit( *this );
 }
@@ -217,7 +217,7 @@ Operands::BoolPtr Gt::eval( const Operands::NumericPtr & aLhs,
 
 
 // class Ge
-void Ge::accept( Evaluator & aEvaluator )
+void Ge::accept( Visitor & aEvaluator )
 {
     aEvaluator.visit( *this );
 }
@@ -238,7 +238,7 @@ Operands::BoolPtr Ge::eval( const Operands::NumericPtr & aLhs,
 
 
 // class Lt
-void Lt::accept( Evaluator & aEvaluator )
+void Lt::accept( Visitor & aEvaluator )
 {
     aEvaluator.visit( *this );
 }
@@ -260,7 +260,7 @@ Operands::BoolPtr Lt::eval( const Operands::NumericPtr & aLhs,
 
 
 // class Le
-void Le::accept( Evaluator & aEvaluator )
+void Le::accept( Visitor & aEvaluator )
 {
     aEvaluator.visit( *this );
 }

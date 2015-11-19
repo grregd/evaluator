@@ -73,7 +73,7 @@ TYPED_TEST_P( OneArgOperationTest, nullPtrOperation )
     Evaluator              lEvaluator;
 
     ASSERT_NO_THROW( lStack.push( typename OperationType::Ptr( ) ) );
-    ASSERT_THROW( lEvaluator.eval( lStack ), std::runtime_error );
+    ASSERT_THROW( Evaluators::evaluate( lStack, lEvaluator ), std::runtime_error );
 }
 
 TYPED_TEST_P( OneArgOperationTest, lackOfArgs )
@@ -88,7 +88,7 @@ TYPED_TEST_P( OneArgOperationTest, lackOfArgs )
         Evaluator              lEvaluator;
 
         ASSERT_NO_THROW( lStack.push( typename OperationType::Ptr( new OperationType() ) ) );
-        ASSERT_THROW( lEvaluator.eval( lStack ), std::runtime_error );
+        ASSERT_THROW( Evaluators::evaluate( lStack, lEvaluator ), std::runtime_error );
     }
 }
 
@@ -107,7 +107,7 @@ TYPED_TEST_P( OneArgOperationTest, exec )
         ASSERT_NO_THROW( lStack.push( typename OperationType::Ptr( new OperationType() ) ) );
         ASSERT_NO_THROW( lStack.push( typename Arg1Type::Ptr( new Arg1Type( this->iTestParams.iArg1Values[i] ) ) ) );
 
-        ASSERT_NO_THROW( lEvaluator.eval( lStack ) );
+        ASSERT_NO_THROW( Evaluators::evaluate( lStack, lEvaluator ) );
 
         ASSERT_EQ( 1, lEvaluator.getOperandsStack().size() );
         ASSERT_TRUE( (bool)(lResultObject = dynamic_pointer_cast<ResultType>(lEvaluator.getOperandsStack().top())) );
@@ -126,7 +126,7 @@ TYPED_TEST_P( TwoArgsOperationTest, nullPtrOperation )
     Evaluator              lEvaluator;
 
     ASSERT_NO_THROW( lStack.push( typename OperationType::Ptr( ) ) );
-    ASSERT_THROW( lEvaluator.eval( lStack ), std::runtime_error );
+    ASSERT_THROW( Evaluators::evaluate( lStack, lEvaluator ), std::runtime_error );
 }
 
 
@@ -142,7 +142,7 @@ TYPED_TEST_P( TwoArgsOperationTest, lackOfArgs )
         Evaluator              lEvaluator;
 
         ASSERT_NO_THROW( lStack.push( typename OperationType::Ptr( new OperationType() ) ) );
-        ASSERT_THROW( lEvaluator.eval( lStack ), std::runtime_error );
+        ASSERT_THROW( Evaluators::evaluate( lStack, lEvaluator ), std::runtime_error );
     }
 
     {
@@ -151,7 +151,7 @@ TYPED_TEST_P( TwoArgsOperationTest, lackOfArgs )
 
         ASSERT_NO_THROW( lStack.push( typename OperationType::Ptr( new OperationType() ) ) );
         ASSERT_NO_THROW( lStack.push( typename Arg1Type::Ptr( new Arg1Type( this->iTestParams.iArg1Values[0] ) ) ) );
-        ASSERT_THROW( lEvaluator.eval( lStack ), std::runtime_error );
+        ASSERT_THROW( Evaluators::evaluate( lStack, lEvaluator ), std::runtime_error );
     }
 
     {
@@ -160,7 +160,7 @@ TYPED_TEST_P( TwoArgsOperationTest, lackOfArgs )
 
         ASSERT_NO_THROW( lStack.push( typename OperationType::Ptr( new OperationType() ) ) );
         ASSERT_NO_THROW( lStack.push( typename Arg2Type::Ptr( new Arg2Type( this->iTestParams.iArg2Values[0] ) ) ) );
-        ASSERT_THROW( lEvaluator.eval( lStack ), std::runtime_error );
+        ASSERT_THROW( Evaluators::evaluate( lStack, lEvaluator ), std::runtime_error );
     }
 }
 
@@ -181,7 +181,7 @@ TYPED_TEST_P( TwoArgsOperationTest, exec )
         ASSERT_NO_THROW( lStack.push( typename Arg1Type::Ptr( new Arg1Type( this->iTestParams.iArg1Values[i] ) ) ) );
         ASSERT_NO_THROW( lStack.push( typename Arg2Type::Ptr( new Arg2Type( this->iTestParams.iArg2Values[i] ) ) ) );
 
-        ASSERT_NO_THROW( lEvaluator.eval( lStack ) );
+        ASSERT_NO_THROW( Evaluators::evaluate( lStack, lEvaluator ) );
 
         ASSERT_EQ( 1, lEvaluator.getOperandsStack().size() )
                 << "Arg1: " << this->iTestParams.iArg1Values[i] << ", Arg2: " << this->iTestParams.iArg2Values[i];

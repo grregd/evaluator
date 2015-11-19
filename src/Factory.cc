@@ -151,14 +151,14 @@ void Factory::transform(
         lTok = lTokenizer.nextStrToken( lExpressionStream );
     }
 
-    while (!op_stack.empty())
+    while ( ! op_stack.empty() )
     {
         lExpressionTokensList.push_back( createToken( op_stack.top() ) );
 
         op_stack.pop();
     }
 
-    while (! lExpressionTokensList.empty())
+    while ( ! lExpressionTokensList.empty() )
     {
         aResultPostfixExpression.push( lExpressionTokensList.back() );
         lExpressionTokensList.pop_back();
@@ -173,7 +173,8 @@ std::string Factory::evalExpression( const std::string & aInfixInput )
     Factory().transform(lStack, aInfixInput );
 
     Evaluators::Evaluator lEvaluator;
-    lEvaluator.eval( lStack );
+//    lEvaluator.eval( lStack );
+    Evaluators::evaluate( lStack, lEvaluator );
 
     std::stringstream lFormatter;
 

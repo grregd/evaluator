@@ -103,6 +103,11 @@ static std::tuple< std::string, TokensList > lVaria[] = {
     std::make_tuple( "&8", TokensList({"&", "8"}) ),
     std::make_tuple( "|9", TokensList({"|", "9"}) ),
 
+    std::make_tuple( "1-0", TokensList({"1", "-", "0"}) ),
+    std::make_tuple( "1 -0", TokensList({"1", "-", "0"}) ),
+    std::make_tuple( "1- 0", TokensList({"1", "-", "0"}) ),
+    std::make_tuple( "1 - 0", TokensList({"1", "-", "0"}) ),
+
     std::make_tuple( "1+1", TokensList({"1", "+", "1"}) ),
     std::make_tuple( "2-2", TokensList({"2", "-", "2"}) ),
     std::make_tuple( "3*3", TokensList({"3", "*", "3"}) ),

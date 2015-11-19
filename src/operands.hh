@@ -10,7 +10,7 @@
 // fwd decl
 namespace Evaluators
 {
-class Evaluator;
+class Visitor;
 } // namespace Evaluators
 
 
@@ -37,7 +37,7 @@ public:
     void setSubject() {}
 
 public:
-    void accept( Evaluators::Evaluator & );
+    void accept( Evaluators::Visitor & );
 
 private:
     //FP11 iSubject;
@@ -65,7 +65,7 @@ public:
     void setValue( bool aValue ) { iValue = aValue; }
 
 public:
-    void accept( Evaluators::Evaluator & );
+    void accept( Evaluators::Visitor & );
 
 private:
     bool iValue;
@@ -93,7 +93,7 @@ public:
     void setValue( NumericType aValue ) { iValue = aValue; }
 
 public:
-    void accept( Evaluators::Evaluator & );
+    void accept( Evaluators::Visitor & );
 
 private:
     NumericType iValue;
@@ -121,7 +121,7 @@ public:
     void setValue( const std::string & aValue ) { iValue = aValue; }
 
 public:
-    void accept( Evaluators::Evaluator & );
+    void accept( Evaluators::Visitor & );
 
 private:
     std::string iValue;

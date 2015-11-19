@@ -6,6 +6,7 @@
 // fwd decl
 namespace Evaluators
 {
+class Visitor;
 class Evaluator;
 } // namespace Evaluators
 
@@ -16,7 +17,8 @@ public:
     virtual ~ExpressionToken() {}
 
 public:
-    virtual void accept( Evaluators::Evaluator & ) = 0;
+//    virtual void accept( Evaluators::Evaluator & ) = 0;
+    virtual void accept( Evaluators::Visitor & ) = 0;
 };
 
 typedef std::shared_ptr< ExpressionToken > ExpressionTokenPtr;

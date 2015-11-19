@@ -11,14 +11,14 @@
 
 namespace Evaluators
 {
-class Evaluator;
+class Visitor;
 }
 
 
 namespace Operations
 {
 
-using Evaluators::Evaluator;
+using Evaluators::Visitor;
 
 /**
  * class Operation
@@ -42,7 +42,7 @@ public:
     typedef std::shared_ptr< Add > Ptr;
 
 public:
-    void accept( Evaluator & aEvaluator );
+    void accept( Visitor & aEvaluator );
 
 public:
     Operands::NumericPtr eval( const Operands::NumericPtr & aLhs,
@@ -62,7 +62,7 @@ public:
     typedef std::shared_ptr< Sub > Ptr;
 
 public:
-    void accept( Evaluator & );
+    void accept( Visitor & );
 
 public:
     Operands::NumericPtr eval( const Operands::NumericPtr & aLhs,
@@ -79,7 +79,7 @@ public:
     typedef std::shared_ptr< Mul > Ptr;
 
 public:
-    void accept( Evaluator & );
+    void accept( Visitor & );
 
 public:
     Operands::NumericPtr eval( const Operands::NumericPtr & aLhs,
@@ -96,7 +96,7 @@ public:
     typedef std::shared_ptr< Div > Ptr;
 
 public:
-    void accept( Evaluator & );
+    void accept( Visitor & );
 
 public:
     Operands::NumericPtr eval( const Operands::NumericPtr & aLhs,
@@ -113,7 +113,7 @@ public:
     typedef std::shared_ptr< Pow > Ptr;
 
 public:
-    void accept( Evaluator & );
+    void accept( Visitor & );
 };
 
 
@@ -126,7 +126,7 @@ public:
     typedef std::shared_ptr< Eq > Ptr;
 
 public:
-    void accept( Evaluator & );
+    void accept( Visitor & );
 
     template< typename PtrType >
     Operands::BoolPtr eval( const PtrType & aLhs,
@@ -154,7 +154,7 @@ public:
     typedef std::shared_ptr< Neq > Ptr;
 
 public:
-    void accept( Evaluator & );
+    void accept( Visitor & );
 };
 
 /**
@@ -166,7 +166,7 @@ public:
     typedef std::shared_ptr< And > Ptr;
 
 public:
-    void accept( Evaluator & );
+    void accept( Visitor & );
 
 public:
     Operands::BoolPtr eval( const Operands::BoolPtr & aLhs,
@@ -182,7 +182,7 @@ public:
     typedef std::shared_ptr< Or > Ptr;
 
 public:
-    void accept( Evaluator & );
+    void accept( Visitor & );
 
 public:
     Operands::BoolPtr eval( const Operands::BoolPtr & aLhs,
@@ -198,7 +198,7 @@ public:
     typedef std::shared_ptr< Not > Ptr;
 
 public:
-    void accept( Evaluator & );
+    void accept( Visitor & );
 
 public:
     Operands::OperandPtr eval( const Operands::BoolPtr & aArg );
@@ -214,7 +214,7 @@ public:
     typedef std::shared_ptr< Gt > Ptr;
 
 public:
-    void accept( Evaluator & );
+    void accept( Visitor & );
 
 public:
     Operands::BoolPtr eval( const Operands::NumericPtr & aLhs,
@@ -231,7 +231,7 @@ public:
     typedef std::shared_ptr< Ge > Ptr;
 
 public:
-    void accept( Evaluator & );
+    void accept( Visitor & );
 
 public:
     Operands::BoolPtr eval( const Operands::NumericPtr & aLhs,
@@ -248,7 +248,7 @@ public:
     typedef std::shared_ptr< Lt > Ptr;
 
 public:
-    void accept( Evaluator & );
+    void accept( Visitor & );
 
 public:
     Operands::BoolPtr eval( const Operands::NumericPtr & aLhs,
@@ -265,7 +265,7 @@ public:
     typedef std::shared_ptr< Le > Ptr;
 
 public:
-    void accept( Evaluator & );
+    void accept( Visitor & );
 
 public:
     Operands::BoolPtr eval( const Operands::NumericPtr & aLhs,

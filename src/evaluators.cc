@@ -14,21 +14,19 @@ using namespace Operations;
 namespace Evaluators
 {
 
-void Evaluator::eval( ExpressionTokensStack & aExprTokStack )
+void evaluate( ExpressionTokensStack & aStack, Visitor & aEvaluator )
 {
-//    cerr << __PRETTY_FUNCTION__ << endl;
-    while ( ! aExprTokStack.empty() )
+    while ( ! aStack.empty() )
     {
-        ExpressionTokenPtr lToken = aExprTokStack.top();
+        ExpressionTokenPtr lToken = aStack.top();
         if ( ! lToken )
         {
-            throw runtime_error( "Evaluator::eval( Stack ) null pointer on the stack." );
+            throw runtime_error( "Evaluators::evaluate - null pointer on the stack." );
         }
-        aExprTokStack.pop();
-        lToken->accept( *this );
+        aStack.pop();
+        lToken->accept( aEvaluator );
     }
 }
-
 
 void Evaluator::visit( Operands::SelectorFP11Ptr aOperand )
 {

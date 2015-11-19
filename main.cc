@@ -72,7 +72,7 @@ int main(int argc, char **argv )
 
 
     Evaluator lEvaluator;
-    lEvaluator.eval( lStack );
+    Evaluators::evaluate( lStack, lEvaluator );
     std::cout << lStack.size() << std::endl;
     std::cout << lEvaluator.getOperandsStack().size() << std::endl;
     if ( Numeric::Ptr lValue = std::dynamic_pointer_cast< Numeric >( lEvaluator.getOperandsStack().top() ) )
