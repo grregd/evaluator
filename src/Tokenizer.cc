@@ -33,7 +33,8 @@ std::string Tokenizer::nextStrToken( std::istream & aInput )
             {
                 eatNumber( lResult );
             }
-            else if (isPlusOrMinus(iPreviousToken[0]))
+            else if (iPreviousToken.size() == 1 &&
+                     isPlusOrMinus(iPreviousToken[0]))
             {
                 eatOperator( lResult );
                 iPreviousToken = lResult;
