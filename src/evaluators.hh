@@ -94,18 +94,11 @@ public:
     void visit( Operations::Le  & aOperation );
 
 private:
-//    template< typename Operation >
-//    Operands::OperandPtr dispatchOneArg( Operation & aOp, const Operands::OperandPtr & aArg ) //throw std::invalid_argument
-//    {
-//        if ( Operands::NumericPtr lNumeric = std::dynamic_pointer_cast<Operands::Numeric>( aArg ) )
-//        {
-//            return aOp.eval( lNumeric );
-//        }
-//        else
-//        {
-//            throw std::invalid_argument( std::string("Evaluator::execute( ") + std::string(typeid(aOp).name()) + " ) can't handle argument.");
-//        }
-//    }
+    template < typename ArgType, typename OperationType >
+    bool invokeEval( OperationType & aOperation, Operands::OperandPtr aArg );
+
+    template < typename LhsType, typename RhsType, typename OperationType >
+    bool invokeEval( OperationType & aOperation, Operands::OperandPtr aLhs, Operands::OperandPtr aRhs );
 
 private:
     Operands::OperandsStack iOperands;

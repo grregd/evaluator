@@ -27,6 +27,34 @@ void evaluate( ExpressionTokensStack & aStack, Visitor & aEvaluator )
     }
 }
 
+
+template < typename ArgType, typename OperationType >
+bool Evaluator::invokeEval( OperationType & aOperation, Operands::OperandPtr aArg )
+{
+    if ( typename ArgType::Ptr lArg = dynamic_pointer_cast< ArgType >( aArg ) )
+    {
+        iOperands.push( aOperation.eval( lArg ) );
+        return true;
+    }
+
+    return false;
+}
+
+template < typename LhsType, typename RhsType, typename OperationType >
+bool Evaluator::invokeEval( OperationType & aOperation, Operands::OperandPtr aLhs, Operands::OperandPtr aRhs )
+{
+    if ( typename LhsType::Ptr lL = std::dynamic_pointer_cast<LhsType>( aLhs ) )
+    {
+        if ( typename RhsType::Ptr lR = std::dynamic_pointer_cast<RhsType>( aRhs ) )
+        {
+            iOperands.push( aOperation.eval( lL, lR ) );
+            return true;
+        }
+    }
+
+    return false;
+}
+
 void Evaluator::visit( Operands::BoolPtr aOperand )
 {
     iOperands.push( aOperand );
@@ -54,23 +82,12 @@ void Evaluator::visit( Operations::Add & aOperation )
     OperandPtr lLhs = iOperands.top();
     iOperands.pop();
 
-    if ( NumericPtr lNumericL = dynamic_pointer_cast<Numeric>( lLhs ) )
+    if ( ! invokeEval< Numeric, Numeric >( aOperation, lLhs, lRhs ) )
     {
-        if ( NumericPtr lNumericR = dynamic_pointer_cast<Numeric>( lRhs ) )
+        if ( ! invokeEval< Text, Text >( aOperation, lLhs, lRhs ) )
         {
-            iOperands.push( aOperation.eval( lNumericL, lNumericR ) );
+            throw std::invalid_argument("Evaluator::execute( Add ) can't handle arguments of such type.");
         }
-    }
-    else if ( TextPtr lTextL = dynamic_pointer_cast<Text>( lLhs ) )
-    {
-        if ( TextPtr lTextR = dynamic_pointer_cast<Text>( lRhs ) )
-        {
-            iOperands.push( aOperation.eval( lTextL, lTextR ) );
-        }
-    }
-    else
-    {
-        throw std::invalid_argument("Evaluator::execute( Add ) can't handle arguments of such type.");
     }
 }
 
@@ -88,14 +105,7 @@ void Evaluator::visit( Operations::Sub & aOperation )
     OperandPtr lLhs = iOperands.top();
     iOperands.pop();
 
-    if ( NumericPtr lNumericL = dynamic_pointer_cast<Numeric>( lLhs ) )
-    {
-        if ( NumericPtr lNumericR = dynamic_pointer_cast<Numeric>( lRhs ) )
-        {
-            iOperands.push( aOperation.eval( lNumericL, lNumericR ) );
-        }
-    }
-    else
+    if ( ! invokeEval< Numeric, Numeric >( aOperation, lLhs, lRhs ) )
     {
         throw std::invalid_argument("Evaluator::execute( Add ) can't handle arguments of such type.");
     }
@@ -113,14 +123,7 @@ void Evaluator::visit( Operations::Mul & aOperation )
     OperandPtr lLhs = iOperands.top();
     iOperands.pop();
 
-    if ( NumericPtr lNumericL = dynamic_pointer_cast<Numeric>( lLhs ) )
-    {
-        if ( NumericPtr lNumericR = dynamic_pointer_cast<Numeric>( lRhs ) )
-        {
-            iOperands.push( aOperation.eval( lNumericL, lNumericR ) );
-        }
-    }
-    else
+    if ( ! invokeEval< Numeric, Numeric >( aOperation, lLhs, lRhs ) )
     {
         throw std::invalid_argument("Evaluator::execute( Add ) can't handle arguments of such type.");
     }
@@ -138,14 +141,7 @@ void Evaluator::visit( Operations::Div & aOperation )
     OperandPtr lLhs = iOperands.top();
     iOperands.pop();
 
-    if ( NumericPtr lNumericL = dynamic_pointer_cast<Numeric>( lLhs ) )
-    {
-        if ( NumericPtr lNumericR = dynamic_pointer_cast<Numeric>( lRhs ) )
-        {
-            iOperands.push( aOperation.eval( lNumericL, lNumericR ) );
-        }
-    }
-    else
+    if ( ! invokeEval< Numeric, Numeric >( aOperation, lLhs, lRhs ) )
     {
         throw std::invalid_argument("Evaluator::execute( Add ) can't handle arguments of such type.");
     }
@@ -172,30 +168,15 @@ void Evaluator::visit( Operations::Eq &  aOperation )
     OperandPtr lLhs = iOperands.top();
     iOperands.pop();
 
-    if ( NumericPtr lNumericL = dynamic_pointer_cast<Numeric>( lLhs ) )
+    if ( ! invokeEval< Numeric, Numeric >( aOperation, lLhs, lRhs ) )
     {
-        if ( NumericPtr lNumericR = dynamic_pointer_cast<Numeric>( lRhs ) )
+        if ( ! invokeEval< Text, Text >( aOperation, lLhs, lRhs ) )
         {
-            iOperands.push( aOperation.eval( lNumericL, lNumericR ) );
+            if ( ! invokeEval< Bool, Bool >( aOperation, lLhs, lRhs ) )
+            {
+                throw std::invalid_argument("Evaluator::execute( Add ) can't handle arguments of such type.");
+            }
         }
-    }
-    else if ( TextPtr lTextL = dynamic_pointer_cast<Text>( lLhs ) )
-    {
-        if ( TextPtr lTextR = dynamic_pointer_cast<Text>( lRhs ) )
-        {
-            iOperands.push( aOperation.eval( lTextL, lTextR ) );
-        }
-    }
-    else if ( BoolPtr lBoolL = dynamic_pointer_cast<Bool>( lLhs ) )
-    {
-        if ( BoolPtr lBoolR = dynamic_pointer_cast<Bool>( lRhs ) )
-        {
-            iOperands.push( aOperation.eval( lBoolL, lBoolR ) );
-        }
-    }
-    else
-    {
-        throw std::invalid_argument("Evaluator::execute( Add ) can't handle arguments of such type.");
     }
 }
 
@@ -220,14 +201,7 @@ void Evaluator::visit( Operations::And & aOperation )
     OperandPtr lLhs = iOperands.top();
     iOperands.pop();
 
-    if ( BoolPtr lBoolL = dynamic_pointer_cast<Bool>( lLhs ) )
-    {
-        if ( BoolPtr lBoolR = dynamic_pointer_cast<Bool>( lRhs ) )
-        {
-            iOperands.push( aOperation.eval( lBoolL, lBoolR ) );
-        }
-    }
-    else
+    if ( ! invokeEval< Bool, Bool >( aOperation, lLhs, lRhs ) )
     {
         throw std::invalid_argument("Evaluator::execute( Or ) can't handle arguments of such type.");
     }
@@ -245,14 +219,7 @@ void Evaluator::visit( Operations::Or & aOperation )
     OperandPtr lLhs = iOperands.top();
     iOperands.pop();
 
-    if ( BoolPtr lBoolL = dynamic_pointer_cast<Bool>( lLhs ) )
-    {
-        if ( BoolPtr lBoolR = dynamic_pointer_cast<Bool>( lRhs ) )
-        {
-            iOperands.push( aOperation.eval( lBoolL, lBoolR ) );
-        }
-    }
-    else
+    if ( ! invokeEval< Bool, Bool >( aOperation, lLhs, lRhs ) )
     {
         throw std::invalid_argument("Evaluator::execute( Or ) can't handle arguments of such type.");
     }
@@ -268,14 +235,7 @@ void Evaluator::visit( Operations::Not & aOperation )
     OperandPtr lLhs = iOperands.top();
     iOperands.pop();
 
-//    dispatchOneArg( aOperation, lLhs );
-    //iOperands.push(  );
-
-    if ( BoolPtr lBool = dynamic_pointer_cast< Bool >( lLhs ) )
-    {
-        iOperands.push( aOperation.eval( lBool ) );
-    }
-    else
+    if ( ! invokeEval< Bool >( aOperation, lLhs ) )
     {
         throw std::invalid_argument("Evaluator::execute( Not ) can't handle arguments.");
     }
@@ -293,14 +253,7 @@ void Evaluator::visit( Operations::Gt & aOperation )
     OperandPtr lLhs = iOperands.top();
     iOperands.pop();
 
-    if ( NumericPtr lNumericL = dynamic_pointer_cast<Numeric>( lLhs ) )
-    {
-        if ( NumericPtr lNumericR = dynamic_pointer_cast<Numeric>( lRhs ) )
-        {
-            iOperands.push( aOperation.eval( lNumericL, lNumericR ) );
-        }
-    }
-    else
+    if ( ! invokeEval< Numeric, Numeric >( aOperation, lLhs, lRhs ) )
     {
         throw std::invalid_argument("Evaluator::execute( Gt ) can't handle arguments of such type.");
     }
@@ -318,14 +271,7 @@ void Evaluator::visit( Operations::Ge & aOperation )
     OperandPtr lLhs = iOperands.top();
     iOperands.pop();
 
-    if ( NumericPtr lNumericL = dynamic_pointer_cast<Numeric>( lLhs ) )
-    {
-        if ( NumericPtr lNumericR = dynamic_pointer_cast<Numeric>( lRhs ) )
-        {
-            iOperands.push( aOperation.eval( lNumericL, lNumericR ) );
-        }
-    }
-    else
+    if ( ! invokeEval< Numeric, Numeric >( aOperation, lLhs, lRhs ) )
     {
         throw std::invalid_argument("Evaluator::execute( Ge ) can't handle arguments of such type.");
     }
@@ -343,14 +289,7 @@ void Evaluator::visit( Operations::Lt & aOperation )
     OperandPtr lLhs = iOperands.top();
     iOperands.pop();
 
-    if ( NumericPtr lNumericL = dynamic_pointer_cast<Numeric>( lLhs ) )
-    {
-        if ( NumericPtr lNumericR = dynamic_pointer_cast<Numeric>( lRhs ) )
-        {
-            iOperands.push( aOperation.eval( lNumericL, lNumericR ) );
-        }
-    }
-    else
+    if ( ! invokeEval< Numeric, Numeric >( aOperation, lLhs, lRhs ) )
     {
         throw std::invalid_argument("Evaluator::execute( Lt ) can't handle arguments of such type.");
     }
@@ -368,14 +307,7 @@ void Evaluator::visit( Operations::Le & aOperation )
     OperandPtr lLhs = iOperands.top();
     iOperands.pop();
 
-    if ( NumericPtr lNumericL = dynamic_pointer_cast<Numeric>( lLhs ) )
-    {
-        if ( NumericPtr lNumericR = dynamic_pointer_cast<Numeric>( lRhs ) )
-        {
-            iOperands.push( aOperation.eval( lNumericL, lNumericR ) );
-        }
-    }
-    else
+    if ( ! invokeEval< Numeric, Numeric >( aOperation, lLhs, lRhs ) )
     {
         throw std::invalid_argument("Evaluator::execute( Le ) can't handle arguments of such type.");
     }
