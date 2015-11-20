@@ -8,11 +8,6 @@ namespace Operands
 {
 
 
-void SelectorFP11::accept( Evaluators::Visitor & aEvaluator )
-{
-    aEvaluator.visit( shared_from_this() );
-}
-
 void Bool::accept( Evaluators::Visitor & aEvaluator )
 {
     aEvaluator.visit( shared_from_this()  );

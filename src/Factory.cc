@@ -172,8 +172,8 @@ std::string Factory::evalExpression( const std::string & aInfixInput )
     ExpressionTokensStack     lStack;
     Factory().transform(lStack, aInfixInput );
 
-    Evaluators::Evaluator lEvaluator;
-//    lEvaluator.eval( lStack );
+//    Evaluators::Evaluator lEvaluator;
+    Evaluators::PrintingEvaluator lEvaluator;
     Evaluators::evaluate( lStack, lEvaluator );
 
     std::stringstream lFormatter;

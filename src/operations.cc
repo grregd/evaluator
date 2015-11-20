@@ -1,5 +1,4 @@
 
-#include <iostream>
 #include <stdexcept>
 
 #include "evaluators.hh"
@@ -33,15 +32,10 @@ Operands::NumericPtr Add::eval( const Operands::NumericPtr & aLhs,
 Operands::TextPtr Add::eval( const Operands::TextPtr & aLhs,
                              const Operands::TextPtr & aRhs  )
 {
-//    cout << __PRETTY_FUNCTION__ << endl;
-
     if ( ! aLhs || ! aRhs )
     {
         throw invalid_argument("Null pointer.");
     }
-
-//    cout << "arg1: " << aLhs->getValue() << endl;
-//    cout << "arg2: " << aRhs->getValue() << endl;
 
     return Operands::TextPtr(
         new Operands::Text(
@@ -183,8 +177,6 @@ void Not::accept( Visitor & aEvaluator )
 
 Operands::OperandPtr Not::eval( const Operands::BoolPtr & aArg )
 {
-    cout << __PRETTY_FUNCTION__ << endl;
-
     if ( ! aArg )
     {
         throw invalid_argument("Null pointer.");

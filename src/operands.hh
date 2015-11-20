@@ -21,26 +21,8 @@ typedef double NumericType;
 
 class Operand: public ExpressionToken
 {
-};
-
-/**
- * @brief Represents the operand which selects its value from Subject.
- */
-class SelectorFP11
-    : public Operand
-    , public std::enable_shared_from_this< SelectorFP11 >
-{
 public:
-    typedef std::shared_ptr< SelectorFP11 > Ptr;
-
-public:
-    void setSubject() {}
-
-public:
-    void accept( Evaluators::Visitor & );
-
-private:
-    //FP11 iSubject;
+    typedef std::shared_ptr< Operand > Ptr;
 };
 
 /**
@@ -129,7 +111,6 @@ private:
 
 
 typedef std::shared_ptr< Operand >       OperandPtr;
-typedef std::shared_ptr< SelectorFP11 >  SelectorFP11Ptr;
 typedef std::shared_ptr< Bool >          BoolPtr;
 typedef std::shared_ptr< Numeric >       NumericPtr;
 typedef std::shared_ptr< Text >          TextPtr;

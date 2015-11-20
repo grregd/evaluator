@@ -178,8 +178,8 @@ TYPED_TEST_P( TwoArgsOperationTest, exec )
         typename ResultType::Ptr  lResultObject;
 
         ASSERT_NO_THROW( lStack.push( typename OperationType::Ptr( new OperationType() ) ) );
-        ASSERT_NO_THROW( lStack.push( typename Arg1Type::Ptr( new Arg1Type( this->iTestParams.iArg1Values[i] ) ) ) );
         ASSERT_NO_THROW( lStack.push( typename Arg2Type::Ptr( new Arg2Type( this->iTestParams.iArg2Values[i] ) ) ) );
+        ASSERT_NO_THROW( lStack.push( typename Arg1Type::Ptr( new Arg1Type( this->iTestParams.iArg1Values[i] ) ) ) );
 
         ASSERT_NO_THROW( Evaluators::evaluate( lStack, lEvaluator ) );
 
