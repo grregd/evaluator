@@ -14,6 +14,12 @@
 
 
 
+//
+// Edsger Dijkstra invented the Shunting-yard algorithm to convert infix expressions to postfix (RPN).
+//
+// http://scriptasylum.com/tutorials/infix_postfix/algorithms/infix-postfix/index.htm
+// http://everything2.com/title/Infix+to+postfix+conversion+algorithm
+
 
 void Factory::transform(
         std::ostream & aResultPostfixExpression,
