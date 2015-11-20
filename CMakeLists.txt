@@ -20,6 +20,8 @@ set( EESOURCES
     ${CMAKE_SOURCE_DIR}/src/Factory.cc
     ${CMAKE_SOURCE_DIR}/src/Tokenizer.hh
     ${CMAKE_SOURCE_DIR}/src/Tokenizer.cc
+    ${CMAKE_SOURCE_DIR}/src/PrintingEvaluator.hh
+    ${CMAKE_SOURCE_DIR}/src/PrintingEvaluator.cc
 )
 
 

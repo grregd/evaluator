@@ -1,6 +1,7 @@
 
 #include "Factory.hh"
 #include "evaluators.hh"
+#include "PrintingEvaluator.hh"
 #include "operands.hh"
 #include "operations.hh"
 #include "Tokenizer.hh"
