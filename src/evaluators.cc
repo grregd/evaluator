@@ -107,7 +107,7 @@ void Evaluator::visit( Operations::Sub & aOperation )
 
     if ( ! invokeEval< Numeric, Numeric >( aOperation, lLhs, lRhs ) )
     {
-        throw std::invalid_argument("Evaluator::execute( Add ) can't handle arguments of such type.");
+        throw std::invalid_argument("Evaluator::execute( Sub ) can't handle arguments of such type.");
     }
 }
 
@@ -125,7 +125,7 @@ void Evaluator::visit( Operations::Mul & aOperation )
 
     if ( ! invokeEval< Numeric, Numeric >( aOperation, lLhs, lRhs ) )
     {
-        throw std::invalid_argument("Evaluator::execute( Add ) can't handle arguments of such type.");
+        throw std::invalid_argument("Evaluator::execute( Mul ) can't handle arguments of such type.");
     }
 }
 
@@ -143,7 +143,7 @@ void Evaluator::visit( Operations::Div & aOperation )
 
     if ( ! invokeEval< Numeric, Numeric >( aOperation, lLhs, lRhs ) )
     {
-        throw std::invalid_argument("Evaluator::execute( Add ) can't handle arguments of such type.");
+        throw std::invalid_argument("Evaluator::execute( Mul ) can't handle arguments of such type.");
     }
 }
 
@@ -174,7 +174,7 @@ void Evaluator::visit( Operations::Eq &  aOperation )
         {
             if ( ! invokeEval< Bool, Bool >( aOperation, lLhs, lRhs ) )
             {
-                throw std::invalid_argument("Evaluator::execute( Add ) can't handle arguments of such type.");
+                throw std::invalid_argument("Evaluator::execute( Eq ) can't handle arguments of such type.");
             }
         }
     }
@@ -203,7 +203,7 @@ void Evaluator::visit( Operations::And & aOperation )
 
     if ( ! invokeEval< Bool, Bool >( aOperation, lLhs, lRhs ) )
     {
-        throw std::invalid_argument("Evaluator::execute( Or ) can't handle arguments of such type.");
+        throw std::invalid_argument("Evaluator::execute( And ) can't handle arguments of such type.");
     }
 }
 
