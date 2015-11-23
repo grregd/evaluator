@@ -1,7 +1,7 @@
 
 set( TARGET_NAME TestStaticDispatcher )
 
-include_directories( ${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/tests/gtest/gtest-1.6.0/include )
+include_directories( ${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/tests/gtest/gtest-1.7.0/include )
 
 add_executable( ${TARGET_NAME}
     main.cc
