@@ -109,6 +109,17 @@ private:
     std::string iValue;
 };
 
+/**
+ * class Variable
+ */
+class Variable
+    : public Operand
+    , public std::enable_shared_from_this< Variable >
+{
+public:
+    typedef std::shared_ptr< Variable > Ptr;
+};
+
 
 typedef std::shared_ptr< Operand >       OperandPtr;
 typedef std::shared_ptr< Bool >          BoolPtr;
