@@ -179,34 +179,21 @@ std::string Factory::evalExpression( const std::string & aInfixInput )
     ExpressionTokensStack     lStack;
     Factory().transform(lStack, aInfixInput );
 
-//    Evaluators::Evaluator lEvaluator;
-    Evaluators::PrintingEvaluator lEvaluator;
+    Evaluators::Evaluator lEvaluator;
+//    Evaluators::PrintingEvaluator lEvaluator( std::cout );
     Evaluators::evaluate( lStack, lEvaluator );
 
-    std::stringstream lFormatter;
 
     if ( ! lEvaluator.getOperandsStack().empty() )
     {
+        std::stringstream lFormatter;
         Operands::OperandPtr lOperand = lEvaluator.getOperandsStack().top();
-        if ( Operands::Numeric::Ptr lValue = std::dynamic_pointer_cast< Operands::Numeric >( lOperand ) )
-        {
-            lFormatter << lValue->getValue();
-        }
-        else if ( Operands::Bool::Ptr lValue = std::dynamic_pointer_cast< Operands::Bool >( lOperand ) )
-        {
-            lFormatter << std::boolalpha << lValue->getValue();
-        }
-        else if ( Operands::Text::Ptr lValue = std::dynamic_pointer_cast< Operands::Text >( lOperand ) )
-        {
-            return lValue->getValue();
-        }
-        else if ( Operations::Operation::Ptr lValue = std::dynamic_pointer_cast< Operations::Operation >( lOperand ) )
-        {
-            lFormatter << typeid(lValue).name();
-        }
+        Evaluators::PrintingEvaluator lResult( lFormatter );
+        lOperand->accept( lResult );
+        return lFormatter.str();
     }
 
-    return lFormatter.str();
+    return "";
 }
 
 std::string Factory::nextStrToken( std::istream & aInput )

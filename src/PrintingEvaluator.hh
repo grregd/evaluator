@@ -9,6 +9,10 @@ namespace Evaluators
 class PrintingEvaluator: public Visitor
 {
 public:
+    PrintingEvaluator( std::ostream & aOutStream )
+        : iOutStream( aOutStream )
+    {}
+
     const Operands::OperandsStack & getOperandsStack() const { return iEvaluator.getOperandsStack(); }
 
     template < typename OStream, typename ArgType >
@@ -26,22 +30,20 @@ public:
     template< typename ArgType >
     void handleOperandVisit( ArgType aArg )
     {
-        std::cout << getArgTypeString( __PRETTY_FUNCTION__ ) << ": ";
-        printOperand( std::cout, aArg ) << std::endl;
+        printOperand( iOutStream, aArg );
         iEvaluator.visit( aArg );
     }
 
     template< typename ArgType >
     void handleOperationVisit( ArgType aArg )
     {
-        std::cout << getArgTypeString( __PRETTY_FUNCTION__ ) << ": ";
-        printOperation( std::cout, aArg ) << std::endl;
+        printOperation( iOutStream, aArg );
         iEvaluator.visit( aArg );
     }
 
-    void visit( Operands::BoolPtr         aOperand );
-    void visit( Operands::NumericPtr      aOperand );
-    void visit( Operands::TextPtr         aOperand );
+    void visit( Operands::BoolPtr    aOperand );
+    void visit( Operands::NumericPtr aOperand );
+    void visit( Operands::TextPtr    aOperand );
 
 public:
     void visit( Operations::Add & aOperation );
@@ -67,9 +69,9 @@ private:
     }
 
 private:
+    std::ostream & iOutStream;
     Evaluator iEvaluator;
 };
-
 
 
 }

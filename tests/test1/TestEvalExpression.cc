@@ -3,17 +3,16 @@
 #include <Factory.hh>
 
 
+TEST( TestEvalExpression, singleShot )
+{
+    ASSERT_EQ( "4.19991", Factory::evalExpression( "1.09991 + 1.1 + 2" ) );
+}
+
 TEST_P(TestEvalExpression, evaluating)
 {
     const char * lInput  = std::get< 0 >( GetParam() );
-    const char * lOutput = std::get< 1 >( GetParam() );
-    //    {
-    //        std::string lExpressions[] = { "1.09991 + 1.1 + 2" };
-    //        std::for_each( lExpressions, lExpressions+1,  )
-            std::cout << lInput << " = " << Factory::evalExpression( lInput ) << std::endl;
-            ASSERT_EQ( lOutput, Factory::evalExpression( lInput ) );
-    //    }
-
+    const char * lExpected = std::get< 1 >( GetParam() );
+    ASSERT_EQ( lExpected, Factory::evalExpression( lInput ) );
 }
 
 std::tuple< const char *, const char * > lOneValue[] = {

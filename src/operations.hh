@@ -132,8 +132,6 @@ public:
     Operands::BoolPtr eval( const PtrType & aLhs,
                             const PtrType & aRhs )
     {
-        std::cout << __PRETTY_FUNCTION__ << std::endl;
-
         if ( ! aLhs || ! aRhs )
         {
             throw std::invalid_argument("Null pointer.");
