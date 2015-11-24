@@ -227,7 +227,15 @@ ExpressionTokenPtr Factory::createToken( const std::string & aInput )
                 case '>': lResult = Operations::Gt::Ptr( new Operations::Gt() ); break;
                 default:
                     {
-                        lResult = Operands::Numeric::Ptr( new Operands::Numeric( std::stod( aInput ) ) );
+                        try
+                        {
+                            lResult = Operands::Numeric::Ptr( new Operands::Numeric( std::stod( aInput ) ) );
+                        }
+                        catch ( std::invalid_argument & e )
+                        {
+                        }
+
+                        lResult = Operands::Text::Ptr( new Operands::Text( aInput ) );
                     }
                 break;
             }
