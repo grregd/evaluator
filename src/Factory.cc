@@ -233,9 +233,8 @@ ExpressionTokenPtr Factory::createToken( const std::string & aInput )
                         }
                         catch ( std::invalid_argument & e )
                         {
+                            lResult = Operands::Text::Ptr( new Operands::Text( aInput ) );
                         }
-
-                        lResult = Operands::Text::Ptr( new Operands::Text( aInput ) );
                     }
                 break;
             }
