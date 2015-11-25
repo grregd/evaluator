@@ -11,7 +11,7 @@
 #include <operands.hh>
 #include <evaluators.hh>
 
-#include "testparams.hh"
+#include "TestOperationsParams.hh"
 
 using namespace std;
 

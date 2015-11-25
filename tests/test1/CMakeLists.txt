@@ -1,16 +1,16 @@
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
 
-set( TARGET_NAME_1 TestEvaluator )
+set( TARGET_NAME_1 TestOperations )
 set( TARGET_NAME_2 TestEvalExpression )
 set( TARGET_NAME_3 TestTokenizer )
 
 include_directories( ${CMAKE_SOURCE_DIR} ${GTEST_SOURCE_DIR}/include )
 
 add_executable( ${TARGET_NAME_1}
-    testeval.cc
-    testparams.hh
-    testparams.cc
+    TestOperations.cc
+    TestOperationsParams.hh
+    TestOperationsParams.cc
     ${EESOURCES}
 )
 

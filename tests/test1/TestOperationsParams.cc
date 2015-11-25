@@ -1,4 +1,4 @@
-#include "testparams.hh"
+#include "TestOperationsParams.hh"
 
 #include <string>
 #include <vector>
