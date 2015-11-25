@@ -45,11 +45,11 @@ public:
     void accept( Visitor & aEvaluator );
 
 public:
-    Operands::NumericPtr eval( const Operands::NumericPtr & aLhs,
-                               const Operands::NumericPtr & aRhs  );
+    Operands::NumericPtr eval( const Operands::Numeric & aLhs,
+                               const Operands::Numeric & aRhs  );
 
-    Operands::TextPtr eval( const Operands::TextPtr & aLhs,
-                            const Operands::TextPtr & aRhs  );
+    Operands::TextPtr eval( const Operands::Text & aLhs,
+                            const Operands::Text & aRhs  );
 };
 
 
@@ -65,8 +65,8 @@ public:
     void accept( Visitor & );
 
 public:
-    Operands::NumericPtr eval( const Operands::NumericPtr & aLhs,
-                               const Operands::NumericPtr & aRhs  );
+    Operands::NumericPtr eval( const Operands::Numeric & aLhs,
+                               const Operands::Numeric & aRhs  );
 };
 
 
@@ -82,8 +82,8 @@ public:
     void accept( Visitor & );
 
 public:
-    Operands::NumericPtr eval( const Operands::NumericPtr & aLhs,
-                               const Operands::NumericPtr & aRhs  );
+    Operands::NumericPtr eval( const Operands::Numeric & aLhs,
+                               const Operands::Numeric & aRhs  );
 };
 
 
@@ -99,8 +99,8 @@ public:
     void accept( Visitor & );
 
 public:
-    Operands::NumericPtr eval( const Operands::NumericPtr & aLhs,
-                               const Operands::NumericPtr & aRhs  );
+    Operands::NumericPtr eval( const Operands::Numeric & aLhs,
+                               const Operands::Numeric & aRhs  );
 };
 
 
@@ -128,18 +128,13 @@ public:
 public:
     void accept( Visitor & );
 
-    template< typename PtrType >
-    Operands::BoolPtr eval( const PtrType & aLhs,
-                            const PtrType & aRhs )
+    template< typename ArgType >
+    Operands::BoolPtr eval( const ArgType & aLhs,
+                            const ArgType & aRhs )
     {
-        if ( ! aLhs || ! aRhs )
-        {
-            throw std::invalid_argument("Null pointer.");
-        }
-
         return Operands::BoolPtr(
             new Operands::Bool(
-                aLhs->getValue() == aRhs->getValue() ) );
+                aLhs.getValue() == aRhs.getValue() ) );
     }
 };
 
@@ -167,8 +162,8 @@ public:
     void accept( Visitor & );
 
 public:
-    Operands::BoolPtr eval( const Operands::BoolPtr & aLhs,
-                            const Operands::BoolPtr & aRhs  );
+    Operands::BoolPtr eval( const Operands::Bool & aLhs,
+                            const Operands::Bool & aRhs  );
 };
 
 /**
@@ -183,8 +178,8 @@ public:
     void accept( Visitor & );
 
 public:
-    Operands::BoolPtr eval( const Operands::BoolPtr & aLhs,
-                            const Operands::BoolPtr & aRhs  );
+    Operands::BoolPtr eval( const Operands::Bool & aLhs,
+                            const Operands::Bool & aRhs  );
 };
 
 /**
@@ -199,7 +194,7 @@ public:
     void accept( Visitor & );
 
 public:
-    Operands::OperandPtr eval( const Operands::BoolPtr & aArg );
+    Operands::OperandPtr eval( const Operands::Bool & aArg );
 };
 
 /**
@@ -215,8 +210,8 @@ public:
     void accept( Visitor & );
 
 public:
-    Operands::BoolPtr eval( const Operands::NumericPtr & aLhs,
-                            const Operands::NumericPtr & aRhs );
+    Operands::BoolPtr eval( const Operands::Numeric & aLhs,
+                            const Operands::Numeric & aRhs );
 };
 
 /**
@@ -232,8 +227,8 @@ public:
     void accept( Visitor & );
 
 public:
-    Operands::BoolPtr eval( const Operands::NumericPtr & aLhs,
-                            const Operands::NumericPtr & aRhs );
+    Operands::BoolPtr eval( const Operands::Numeric & aLhs,
+                            const Operands::Numeric & aRhs );
 };
 
 /**
@@ -249,8 +244,8 @@ public:
     void accept( Visitor & );
 
 public:
-    Operands::BoolPtr eval( const Operands::NumericPtr & aLhs,
-                            const Operands::NumericPtr & aRhs );
+    Operands::BoolPtr eval( const Operands::Numeric & aLhs,
+                            const Operands::Numeric & aRhs );
 };
 
 /**
@@ -266,8 +261,8 @@ public:
     void accept( Visitor & );
 
 public:
-    Operands::BoolPtr eval( const Operands::NumericPtr & aLhs,
-                            const Operands::NumericPtr & aRhs );
+    Operands::BoolPtr eval( const Operands::Numeric & aLhs,
+                            const Operands::Numeric & aRhs );
 };
 
 

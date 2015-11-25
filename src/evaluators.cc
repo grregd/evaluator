@@ -33,7 +33,7 @@ bool Evaluator::invokeEval( OperationType & aOperation, Operands::OperandPtr aAr
 {
     if ( typename ArgType::Ptr lArg = dynamic_pointer_cast< ArgType >( aArg ) )
     {
-        iOperands.push( aOperation.eval( lArg ) );
+        iOperands.push( aOperation.eval( *lArg ) );
         return true;
     }
 
@@ -47,7 +47,7 @@ bool Evaluator::invokeEval( OperationType & aOperation, Operands::OperandPtr aLh
     {
         if ( typename RhsType::Ptr lR = std::dynamic_pointer_cast<RhsType>( aRhs ) )
         {
-            iOperands.push( aOperation.eval( lL, lR ) );
+            iOperands.push( aOperation.eval( *lL, *lR ) );
             return true;
         }
     }

@@ -15,32 +15,22 @@ void Add::accept( Visitor & aEvaluator )
     aEvaluator.visit( *this );
 }
 
-Operands::NumericPtr Add::eval( const Operands::NumericPtr & aLhs,
-                                const Operands::NumericPtr & aRhs  )
+Operands::NumericPtr Add::eval( const Operands::Numeric & aLhs,
+                                const Operands::Numeric & aRhs  )
 {
-    if ( ! aLhs || ! aRhs )
-    {
-        throw invalid_argument("Null pointer.");
-    }
-
     return Operands::NumericPtr(
         new Operands::Numeric(
-              aLhs->getValue()
-            + aRhs->getValue() ) );
+              aLhs.getValue()
+            + aRhs.getValue() ) );
 }
 
-Operands::TextPtr Add::eval( const Operands::TextPtr & aLhs,
-                             const Operands::TextPtr & aRhs  )
+Operands::TextPtr Add::eval( const Operands::Text & aLhs,
+                             const Operands::Text & aRhs  )
 {
-    if ( ! aLhs || ! aRhs )
-    {
-        throw invalid_argument("Null pointer.");
-    }
-
     return Operands::TextPtr(
         new Operands::Text(
-              aLhs->getValue()
-            + aRhs->getValue() ) );
+              aLhs.getValue()
+            + aRhs.getValue() ) );
 }
 
 // class Sub
@@ -49,18 +39,13 @@ void Sub::accept( Visitor & aEvaluator )
     aEvaluator.visit( *this );
 }
 
-Operands::NumericPtr Sub::eval( const Operands::NumericPtr & aLhs,
-                                const Operands::NumericPtr & aRhs  )
+Operands::NumericPtr Sub::eval( const Operands::Numeric & aLhs,
+                                const Operands::Numeric & aRhs  )
 {
-    if ( ! aLhs || ! aRhs )
-    {
-        throw invalid_argument("Null pointer.");
-    }
-
     return Operands::NumericPtr(
         new Operands::Numeric(
-              aLhs->getValue()
-            - aRhs->getValue() ) );
+              aLhs.getValue()
+            - aRhs.getValue() ) );
 }
 
 
@@ -70,18 +55,13 @@ void Mul::accept( Visitor & aEvaluator )
     aEvaluator.visit( *this );
 }
 
-Operands::NumericPtr Mul::eval( const Operands::NumericPtr & aLhs,
-                                const Operands::NumericPtr & aRhs  )
+Operands::NumericPtr Mul::eval( const Operands::Numeric & aLhs,
+                                const Operands::Numeric & aRhs  )
 {
-    if ( ! aLhs || ! aRhs )
-    {
-        throw invalid_argument("Null pointer.");
-    }
-
     return Operands::NumericPtr(
         new Operands::Numeric(
-              aLhs->getValue()
-            * aRhs->getValue() ) );
+              aLhs.getValue()
+            * aRhs.getValue() ) );
 }
 
 // class Div
@@ -90,23 +70,18 @@ void Div::accept( Visitor & aEvaluator )
     aEvaluator.visit( *this );
 }
 
-Operands::NumericPtr Div::eval( const Operands::NumericPtr & aLhs,
-                                const Operands::NumericPtr & aRhs  )
+Operands::NumericPtr Div::eval( const Operands::Numeric & aLhs,
+                                const Operands::Numeric & aRhs  )
 {
-    if ( ! aLhs || ! aRhs )
-    {
-        throw invalid_argument("Null pointer.");
-    }
-
-    if ( aRhs->getValue() == 0 )
+    if ( aRhs.getValue() == 0 )
     {
         throw invalid_argument("Division by 0.");
     }
 
     return Operands::NumericPtr(
         new Operands::Numeric(
-              aLhs->getValue()
-            / aRhs->getValue() ) );
+              aLhs.getValue()
+            / aRhs.getValue() ) );
 }
 
 // class Pow
@@ -133,18 +108,13 @@ void Or::accept( Visitor & aEvaluator )
     aEvaluator.visit( *this );
 }
 
-Operands::BoolPtr Or::eval( const Operands::BoolPtr & aLhs,
-                            const Operands::BoolPtr & aRhs  )
+Operands::BoolPtr Or::eval( const Operands::Bool & aLhs,
+                            const Operands::Bool & aRhs  )
 {
-    if ( ! aLhs || ! aRhs )
-    {
-        throw invalid_argument("Null pointer.");
-    }
-
     return Operands::BoolPtr(
         new Operands::Bool(
-               aLhs->getValue()
-            || aRhs->getValue() ) );
+               aLhs.getValue()
+            || aRhs.getValue() ) );
 }
 
 
@@ -154,18 +124,13 @@ void And::accept( Visitor & aEvaluator )
     aEvaluator.visit( *this );
 }
 
-Operands::BoolPtr And::eval( const Operands::BoolPtr & aLhs,
-                            const Operands::BoolPtr & aRhs  )
+Operands::BoolPtr And::eval( const Operands::Bool & aLhs,
+                             const Operands::Bool & aRhs  )
 {
-    if ( ! aLhs || ! aRhs )
-    {
-        throw invalid_argument("Null pointer.");
-    }
-
     return Operands::BoolPtr(
         new Operands::Bool(
-               aLhs->getValue()
-            && aRhs->getValue() ) );
+               aLhs.getValue()
+            && aRhs.getValue() ) );
 }
 
 
@@ -175,16 +140,9 @@ void Not::accept( Visitor & aEvaluator )
     aEvaluator.visit( *this );
 }
 
-Operands::OperandPtr Not::eval( const Operands::BoolPtr & aArg )
+Operands::OperandPtr Not::eval( const Operands::Bool & aArg )
 {
-    if ( ! aArg )
-    {
-        throw invalid_argument("Null pointer.");
-    }
-
-    return Operands::BoolPtr(
-        new Operands::Bool(
-              ! aArg->getValue() ) );
+    return Operands::BoolPtr( new Operands::Bool( ! aArg.getValue() ) );
 }
 
 // class Gt
@@ -193,18 +151,13 @@ void Gt::accept( Visitor & aEvaluator )
     aEvaluator.visit( *this );
 }
 
-Operands::BoolPtr Gt::eval( const Operands::NumericPtr & aLhs,
-                            const Operands::NumericPtr & aRhs  )
+Operands::BoolPtr Gt::eval( const Operands::Numeric & aLhs,
+                            const Operands::Numeric & aRhs  )
 {
-    if ( ! aLhs || ! aRhs )
-    {
-        throw invalid_argument("Null pointer.");
-    }
-
     return Operands::BoolPtr(
         new Operands::Bool(
-               aLhs->getValue()
-            > aRhs->getValue() ) );
+               aLhs.getValue()
+             > aRhs.getValue() ) );
 }
 
 
@@ -214,18 +167,13 @@ void Ge::accept( Visitor & aEvaluator )
     aEvaluator.visit( *this );
 }
 
-Operands::BoolPtr Ge::eval( const Operands::NumericPtr & aLhs,
-                            const Operands::NumericPtr & aRhs  )
+Operands::BoolPtr Ge::eval( const Operands::Numeric & aLhs,
+                            const Operands::Numeric & aRhs  )
 {
-    if ( ! aLhs || ! aRhs )
-    {
-        throw invalid_argument("Null pointer.");
-    }
-
     return Operands::BoolPtr(
         new Operands::Bool(
-               aLhs->getValue()
-            >= aRhs->getValue() ) );
+               aLhs.getValue()
+            >= aRhs.getValue() ) );
 }
 
 
@@ -235,18 +183,13 @@ void Lt::accept( Visitor & aEvaluator )
     aEvaluator.visit( *this );
 }
 
-Operands::BoolPtr Lt::eval( const Operands::NumericPtr & aLhs,
-                            const Operands::NumericPtr & aRhs  )
+Operands::BoolPtr Lt::eval( const Operands::Numeric & aLhs,
+                            const Operands::Numeric & aRhs  )
 {
-    if ( ! aLhs || ! aRhs )
-    {
-        throw invalid_argument("Null pointer.");
-    }
-
     return Operands::BoolPtr(
         new Operands::Bool(
-               aLhs->getValue()
-            < aRhs->getValue() ) );
+               aLhs.getValue()
+             < aRhs.getValue() ) );
 }
 
 
@@ -257,18 +200,13 @@ void Le::accept( Visitor & aEvaluator )
     aEvaluator.visit( *this );
 }
 
-Operands::BoolPtr Le::eval( const Operands::NumericPtr & aLhs,
-                            const Operands::NumericPtr & aRhs  )
+Operands::BoolPtr Le::eval( const Operands::Numeric & aLhs,
+                            const Operands::Numeric & aRhs  )
 {
-    if ( ! aLhs || ! aRhs )
-    {
-        throw invalid_argument("Null pointer.");
-    }
-
     return Operands::BoolPtr(
         new Operands::Bool(
-               aLhs->getValue()
-            <= aRhs->getValue() ) );
+               aLhs.getValue()
+            <= aRhs.getValue() ) );
 }
 
 
