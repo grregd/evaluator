@@ -210,7 +210,18 @@ ExpressionTokenPtr Factory::createToken( const std::string & aInput )
     {
         if ( aInput.size() > 1 )
         {
-            lResult = Operands::Numeric::Ptr( new Operands::Numeric( std::stod( aInput ) ) );
+            if ( aInput.find( "true" ) != std::string::npos )
+            {
+                lResult = Operands::Bool::Ptr( new Operands::Bool( true ) );
+            }
+            else if ( aInput.find( "false" ) != std::string::npos )
+            {
+                lResult = Operands::Bool::Ptr( new Operands::Bool( false ) );
+            }
+            else
+            {
+                lResult = Operands::Numeric::Ptr( new Operands::Numeric( std::stod( aInput ) ) );
+            }
         }
         else
         {
