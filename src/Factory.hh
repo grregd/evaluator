@@ -30,14 +30,15 @@ public:
             const std::string & aOperations = "+-*/^<>|&" );
 
 private:
-    void init_precedencetab();
+    static void init_precedencetab();
 
-    inline int cmpprecedence( const char op1, const char op2 )
+    static inline int cmpprecedence( const char op1, const char op2 )
     {
         return precedencetab[op1] - precedencetab[op2];
     }
 
 private:
-    int precedencetab['^'+1];
+    static int precedencetab['^'+1];
+    static bool iInit;
 };
 

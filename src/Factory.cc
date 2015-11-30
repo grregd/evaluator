@@ -20,13 +20,15 @@
 // http://scriptasylum.com/tutorials/infix_postfix/algorithms/infix-postfix/index.htm
 // http://everything2.com/title/Infix+to+postfix+conversion+algorithm
 
+int Factory::precedencetab['^'+1];
+bool Factory::iInit = (Factory::init_precedencetab(), true);
+
 
 void Factory::transform(
         std::ostream & aResultPostfixExpression,
         const std::string & aInfixExpression,
         const std::string & aOperations )
 {
-    init_precedencetab();
     std::stack<char> op_stack;
 
     std::string::const_iterator it  = aInfixExpression.begin();
@@ -117,8 +119,6 @@ void Factory::transform(
         const std::string & aInfixExpression,
         const std::string & aOperations  )
 {
-    init_precedencetab();
-
     std::list< ExpressionTokenPtr>  lExpressionTokensList;
     std::stack<std::string> op_stack;
     std::stringstream lExpressionStream(aInfixExpression);
