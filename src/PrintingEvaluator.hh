@@ -18,7 +18,7 @@ public:
     template < typename OStream, typename ArgType >
     OStream & printOperand( OStream & aOStream, ArgType aArg )
     {
-        return aOStream << aArg->getValue();
+        return aOStream << std::boolalpha << aArg->getValue();
     }
 
     template < typename OStream, typename ArgType >
