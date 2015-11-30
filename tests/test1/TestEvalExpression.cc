@@ -157,45 +157,45 @@ std::tuple< const char *, const char * > lOneSubNegative[] = {
 };
 
 std::tuple< const char *, const char * > lBoolean[] = {
-    std::make_tuple( "false|false", "0" ),
-    std::make_tuple( "false|true",  "1" ),
-    std::make_tuple( "true|false",  "1" ),
-    std::make_tuple( "true|true",  "1" ),
+    std::make_tuple( "false|false", "false" ),
+    std::make_tuple( "false|true",  "true" ),
+    std::make_tuple( "true|false",  "true" ),
+    std::make_tuple( "true|true",  "true" ),
 
-    std::make_tuple( "false| false", "0" ),
-    std::make_tuple( "false| true",  "1" ),
-    std::make_tuple( "true| false",  "1" ),
-    std::make_tuple( "true| true",  "1" ),
+    std::make_tuple( "false| false", "false" ),
+    std::make_tuple( "false| true",  "true" ),
+    std::make_tuple( "true| false",  "true" ),
+    std::make_tuple( "true| true",  "true" ),
 
-    std::make_tuple( "false |false", "0" ),
-    std::make_tuple( "false |true",  "1" ),
-    std::make_tuple( "true |false",  "1" ),
-    std::make_tuple( "true |true",  "1" ),
+    std::make_tuple( "false |false", "false" ),
+    std::make_tuple( "false |true",  "true" ),
+    std::make_tuple( "true |false",  "true" ),
+    std::make_tuple( "true |true",  "true" ),
 
-    std::make_tuple( "false | false", "0" ),
-    std::make_tuple( "false | true",  "1" ),
-    std::make_tuple( "true | false",  "1" ),
-    std::make_tuple( "true | true",  "1" ),
+    std::make_tuple( "false | false", "false" ),
+    std::make_tuple( "false | true",  "true" ),
+    std::make_tuple( "true | false",  "true" ),
+    std::make_tuple( "true | true",  "true" ),
 
-    std::make_tuple( "false&false", "0" ),
-    std::make_tuple( "false&true",  "0" ),
-    std::make_tuple( "true&false",  "0" ),
-    std::make_tuple( "true&true",  "1" ),
+    std::make_tuple( "false&false", "false" ),
+    std::make_tuple( "false&true",  "false" ),
+    std::make_tuple( "true&false",  "false" ),
+    std::make_tuple( "true&true",  "true" ),
 
-    std::make_tuple( "false& false", "0" ),
-    std::make_tuple( "false& true",  "0" ),
-    std::make_tuple( "true& false",  "0" ),
-    std::make_tuple( "true& true",  "1" ),
+    std::make_tuple( "false& false", "false" ),
+    std::make_tuple( "false& true",  "false" ),
+    std::make_tuple( "true& false",  "false" ),
+    std::make_tuple( "true& true",  "true" ),
 
-    std::make_tuple( "false &false", "0" ),
-    std::make_tuple( "false &true",  "0" ),
-    std::make_tuple( "true &false",  "0" ),
-    std::make_tuple( "true &true",  "1" ),
+    std::make_tuple( "false &false", "false" ),
+    std::make_tuple( "false &true",  "false" ),
+    std::make_tuple( "true &false",  "false" ),
+    std::make_tuple( "true &true",  "true" ),
 
-    std::make_tuple( "false & false", "0" ),
-    std::make_tuple( "false & true",  "0" ),
-    std::make_tuple( "true & false",  "0" ),
-    std::make_tuple( "true & true",  "1" ),
+    std::make_tuple( "false & false", "false" ),
+    std::make_tuple( "false & true",  "false" ),
+    std::make_tuple( "true & false",  "false" ),
+    std::make_tuple( "true & true",  "true" ),
 };
 
 std::tuple< const char *, const char * > lVaria[] = {
@@ -207,5 +207,6 @@ INSTANTIATE_TEST_CASE_P(OneAddPositive,   TestEvalExpression, ::testing::ValuesI
 INSTANTIATE_TEST_CASE_P(OneAddNegative,   TestEvalExpression, ::testing::ValuesIn( lOneAddNegative ) );
 INSTANTIATE_TEST_CASE_P(OneSubPositive,   TestEvalExpression, ::testing::ValuesIn( lOneSubPositive ) );
 INSTANTIATE_TEST_CASE_P(OneSubNegative,   TestEvalExpression, ::testing::ValuesIn( lOneSubNegative ) );
+INSTANTIATE_TEST_CASE_P(Boolean,          TestEvalExpression, ::testing::ValuesIn( lBoolean ) );
 INSTANTIATE_TEST_CASE_P(Varia,            TestEvalExpression, ::testing::ValuesIn( lVaria ) );
 
